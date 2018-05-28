@@ -29,7 +29,7 @@ class CubicBSpline(object):
         #     y = eval_1d(ys, t)
         #     return np.array([x, y])
 
-        def eval_alter(t):
+        def eval(t):
             xy = [0, 0]
             for k in range(self.n):
                 point = self.pts[k]
@@ -38,7 +38,7 @@ class CubicBSpline(object):
                 xy[1] = xy[1] + point[1] * b
             return np.array(xy)
 
-        self.eval = eval_alter
+        self.eval = eval
         # ts = np.linspace(3, self.n, self.M)
         # for i in range(self.M):
         #     self.points[ts[i]] = self.eval(ts[i])

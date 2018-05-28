@@ -19,13 +19,13 @@ class LaneMath(object):
 
     def show(self, data_path, axis=False):
         files = sorted(os.listdir(data_path))
-        k = 0
+        # k = 0
         # for file in files:
         #     lane_mask = np.load(os.path.join(data_path, file))
         #     self.show_graph(lane_mask, axis)
         #     print("File " + str(k) + " completed")
         #     k = k + 1
-        lane_mask = np.load(os.path.join(data_path, files[5]))  # Error cases: 3,5,12,19,79
+        lane_mask = np.load(os.path.join(data_path, files[4]))  # Error cases: 3,5,12,19,79
         self.show_graph(lane_mask, axis)
 
     def show_graph(self, lane_mask, axis=False):
@@ -56,6 +56,7 @@ class LaneMath(object):
             numctrl = len(lanes[id]) / 800
             # arr = [[dataxs[0], datays[0]], [dataxs[0], datays[0]]]
             arr = [[dataxs[0], datays[0]], [dataxs[0], datays[0]], [dataxs[0], datays[0]]]
+            # arr = [[dataxs[0], datays[0]], [dataxs[0], datays[0]]]
             for i in range(numctrl - 1):
                 arr.append([dataxs[(i + 1) * n / numctrl], datays[(i + 1) * n / numctrl]])
                 # plt.plot(dataxs[(i + 1) * n / numctrl], datays[(i + 1) * n / numctrl], 'ko')
