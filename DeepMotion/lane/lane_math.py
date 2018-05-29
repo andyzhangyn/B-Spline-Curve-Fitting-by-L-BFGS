@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 import b_spline_model
 import time
 from sklearn.decomposition import PCA
+import math
+import scipy as sp
 
 
 class LaneMath(object):
@@ -25,7 +27,7 @@ class LaneMath(object):
         #     self.show_graph(lane_mask, axis)
         #     print("File " + str(k) + " completed")
         #     k = k + 1
-        lane_mask = np.load(os.path.join(data_path, files[4]))  # Error cases: 3,5,12,19,79
+        lane_mask = np.load(os.path.join(data_path, files[3]))  # Error cases: 3,5,12,19,79
         self.show_graph(lane_mask, axis)
 
     def show_graph(self, lane_mask, axis=False):
@@ -46,7 +48,26 @@ class LaneMath(object):
                 if lane_mask[i, j] in lane_ids:
                     lanes[lane_mask[i, j]].append([j, i])
         for id in lane_ids:
+            # pca = PCA(n_components=1)
+            # pca.fit(lanes[id])
+            # if pca.explained_variance_ratio_[0] < 0.98 or True:
+            #     lane = lanes[id]
+            #     lanexs, laneys = [p[0] for p in lane], [p[1] for p in lane]
+            #     lanexs, laneys = self.RANSAC_Quadratic_Interpolation(lanexs, laneys)
+            #     plt.plot(lanexs, laneys, 'k,')
+            #     lane = [[lanexs[k], laneys[k]] for k in range(len(lanexs))]
+            #     lanes[id] = lane
+
+            # lane = lanes[id]
+            # lanexs, laneys = [p[0] for p in lane], [p[1] for p in lane]
+            # lanexs, laneys = self.RANSAC_Quadratic_Interpolation(lanexs, laneys)
+            # # plt.plot(lanexs, laneys, 'k,')
+            # lane = [[lanexs[k], laneys[k]] for k in range(len(lanexs))]
+            # lanes[id] = lane
+
             dataxs, datays = self.get_data_sample(lane_mask, id, lanes)
+            # dataxs, datays = self.RANSAC_LeastSquare(dataxs, datays)
+            # dataxs, datays = self.RANSAC_Quadratic_Interpolation(dataxs, datays)
             # plt.plot(dataxs, datays, 'b^')
             n = dataxs.shape[0]
             data = np.zeros((n, 2))
@@ -54,8 +75,10 @@ class LaneMath(object):
                 data[i, 0] = dataxs[i]
                 data[i, 1] = datays[i]
             numctrl = len(lanes[id]) / 800
-            # arr = [[dataxs[0], datays[0]], [dataxs[0], datays[0]]]
+            # print(dataxs)
+            # print(datays)
             arr = [[dataxs[0], datays[0]], [dataxs[0], datays[0]], [dataxs[0], datays[0]]]
+            # arr = [[data[0, 0], data[0, 1]], [data[0, 0], data[0, 1]], [data[0, 0], data[0, 1]]]
             # arr = [[dataxs[0], datays[0]], [dataxs[0], datays[0]]]
             for i in range(numctrl - 1):
                 arr.append([dataxs[(i + 1) * n / numctrl], datays[(i + 1) * n / numctrl]])
@@ -64,12 +87,127 @@ class LaneMath(object):
             arr.append([dataxs[n - 1], datays[n - 1]])
             arr.append([dataxs[n - 1], datays[n - 1]])
             arr.append([dataxs[n - 1], datays[n - 1]])
+            # arr.append([data[n - 1][0], data[n - 1][1]])
+            # arr.append([data[n - 1][0], data[n - 1][1]])
             ctrlpts = np.array(arr, dtype=np.float)
             # ctrlpts = np.array([[50, -50], [50, 50], [200, 100], [250, 300], [350, 500], [250, 600]], dtype=np.float)
             model = b_spline_model.BSplineModel(data, ctrlpts, img=img, id=id)
             # model.plot()
             model.l_bfgs_fitting()
         plt.show()
+
+    def RANSAC_Quadratic_Interpolation(self, dataxs, datays, niter=50, threshold=100, d=100):
+        if len(dataxs) < 4:
+            return dataxs, datays
+        np.random.seed(0)
+        best_dataxs = dataxs
+        best_datays = datays
+        min_loss = 1000000
+        n = len(dataxs)
+        for i in range(niter):
+            newdataxs = []
+            newdatays = []
+            rand1 = np.random.randint(0, n / 4)
+            rand2 = np.random.randint(n / 4, 3 * n / 4)
+            rand3 = np.random.randint(3 * n / 4, n)
+            while True:
+                if rand1 == rand2:
+                    rand2 = np.random.randint(0, n)
+                else:
+                    break
+            while True:
+                if rand3 == rand1 or rand3 == rand2:
+                    rand3 = np.random.randint(0, n)
+                else:
+                    break
+            var1 = min(rand1, rand2, rand3)
+            var3 = max(rand1, rand2, rand3)
+            var2 = rand1 + rand2 + rand3 - var1 - var3
+            rand1, rand2, rand3 = var1, var2, var3
+            polyx = sp.interpolate.lagrange(range(3), [dataxs[rand1], dataxs[rand2], dataxs[rand3]])
+            polyy = sp.interpolate.lagrange(range(3), [datays[rand1], datays[rand2], datays[rand3]])
+            # ts = np.linspace(0, 2, 20)
+            # plt.plot([dataxs[rand1], dataxs[rand2], dataxs[rand3]], [datays[rand1], datays[rand2], datays[rand3]], "bs")
+            # plt.plot(polyx(ts), polyy(ts), "k")
+            loss = 0
+            for j in range(len(dataxs)):
+                p3 = np.array([dataxs[j], datays[j]])
+                min_point2curve = 1000000
+                for k in range(0, 120):
+                    point2curve = (polyx(k / 20.0 - 2) - p3[0]) ** 2 + (polyy(k / 20.0 - 2) - p3[1]) ** 2
+                    if point2curve < min_point2curve:
+                        min_point2curve = point2curve
+                min_point2curve = math.sqrt(min_point2curve)
+                # if min_point2curve > threshold:
+                #     min_point2curve = 2 * threshold
+                loss = loss + min_point2curve ** 2
+                if min_point2curve <= threshold:
+                    newdataxs.append(p3[0])
+                    newdatays.append(p3[1])
+            newdataxs = np.array(newdataxs)
+            newdatays = np.array(newdatays)
+            if len(newdataxs) >= d:
+                return newdataxs, newdatays
+            if loss < min_loss:
+                min_loss = loss
+                best_dataxs = newdataxs
+                best_datays = newdatays
+        return best_dataxs, best_datays
+
+
+    def RANSAC_LeastSquare(self, dataxs, datays, niter=100, threshold=60, d=100):
+        if len(dataxs) < 3:
+            return dataxs, datays
+        np.random.seed(0)
+        best_dataxs = dataxs
+        best_datays = datays
+        min_loss = 1000000
+        for i in range(niter):
+            newdataxs = []
+            newdatays = []
+            rand1 = np.random.randint(0, len(dataxs))
+            rand2 = np.random.randint(0, len(dataxs))
+            while True:
+                if rand1 == rand2:
+                    rand2 = np.random.randint(0, len(dataxs))
+                else:
+                    break
+            p1 = np.array([dataxs[rand1], datays[rand1]])
+            p2 = np.array([dataxs[rand2], datays[rand2]])
+            # p2 = data(np.random.randint(0, len(data)))
+            v = p1 - p2
+            loss = 0
+            for j in range(len(dataxs)):
+                p3 = np.array([dataxs[j], datays[j]])
+                w = p3 - p2
+                sq_dist = w[0] ** 2 + w[1] ** 2 - (v[0] * w[0] + v[1] * w[1]) ** 2 / (v[0] ** 2 + v[1] ** 2)
+                if sq_dist < 0:
+                    sq_dist = 0
+                loss = loss + sq_dist
+                # print(v)
+                # print(w)
+                # print(sq_dist)
+                dist = math.sqrt(sq_dist)
+                if dist <= threshold:
+                    # print("Hey")
+                    # print(p3)
+                    # np.append(newdataxs, p3[0])
+                    # np.append(newdatays, p3[1])
+                    newdataxs.append(p3[0])
+                    newdatays.append(p3[1])
+                    # print(newdatays)
+            # print(newdataxs)
+            # print(newdatays)
+            newdataxs = np.array(newdataxs)
+            newdatays = np.array(newdatays)
+            if len(newdataxs) >= d:
+                # print("Hello")
+                return newdataxs, newdatays
+            if loss < min_loss:
+                min_loss = loss
+                best_dataxs = newdataxs
+                best_datays = newdatays
+        return best_dataxs, best_datays
 
     @staticmethod
     def colorise(lane_mask, black_background=False):
@@ -124,7 +262,8 @@ class LaneMath(object):
         data_density = 200
         k = 0
         lane = lanes[id]
-        if (abs(lane[0][1] - lane[-1][1]) + 1) / (abs(lane[0][0] - lane[-1][0]) + 1) < 1:
+        if abs(pca.components_[0][1]) / (abs(pca.components_[0][0]) + 0.1) < 1:
+        # if (abs(lane[0][1] - lane[-1][1]) + 1) / (abs(lane[0][0] - lane[-1][0]) + 1) < 1:
             for j in range(lane_mask.shape[1]):
                 for i in range(lane_mask.shape[0]):
                     if lane_mask[i][j] == id:
@@ -153,7 +292,12 @@ class LaneMath(object):
                 k = k + 1
         dataxs.append(lane[-1][0])
         datays.append(lane[-1][1])
-        return np.array(dataxs), np.array(datays)
+        # n = len(dataxs)
+        # data = np.zeros((n, 2))
+        # for i in range(n):
+        #     data[i, 0] = dataxs[i]
+        #     data[i, 1] = datays[i]
+        return np.array(dataxs, dtype=float), np.array(datays, dtype=float)
 
 
 if __name__ == '__main__':

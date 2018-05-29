@@ -5,7 +5,9 @@
 
 
 import os
+import cv2
 import numpy as np
+from lane_math import LaneMath
 
 
 class ShowData(object):
@@ -17,19 +19,11 @@ class ShowData(object):
         files = sorted(os.listdir(data_path))
         for fname in files:
             data = np.load(os.path.join(data_path, fname))
-            print(data)
+            cv2.imshow("Lane", LaneMath.colorise(data, True))
+            cv2.waitKey(1)
 
-    def show_first(self, data_path):
-        files = sorted(os.listdir(data_path))
-        first_data = np.load(os.path.join(data_path, files[0]))
-        # lane_ids = np.unique(first_data)
-        # print(lane_ids)
-        for item in first_data:
-            for subitem in item:
-                if subitem >= 0:
-                    print(subitem)
 
 
 if __name__ == '__main__':
     show_data = ShowData()
-    show_data.show_first('/home/yuanning/DeepMotion/lane/data')
+    show_data.show('/home/yuanning/DeepMotion/lane/data')

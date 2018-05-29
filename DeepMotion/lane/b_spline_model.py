@@ -31,7 +31,6 @@ class BSplineModel(object):
         self.pts = pts
         self.N = data.shape[0]  # fixed
         self.n = pts.shape[0]  # fixed
-        # self.niter = niter
         self.cbs = cubic_b_spline.CubicBSpline(self.pts)
         self.T = np.zeros(self.N)
         k = (self.n - 3.0) / self.N

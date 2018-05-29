@@ -9,25 +9,9 @@ import numpy as np
 
 class CubicBSpline(object):
 
-    def __init__(self, pts, precision=10):
+    def __init__(self, pts):
         self.n = pts.shape[0]
         self.pts = pts
-        # self.M = precision * (self.n - 3)
-        # self.points = {}
-
-        # def eval_1d(xs, t):
-        #     y = 0
-        #     for k in range(self.n):
-        #         y = y + xs[k] * self.cubic(k, t)
-        #     return y
-
-        # xs = [point[0] for point in self.pts]
-        # ys = [point[1] for point in self.pts]
-
-        # def eval(t):
-        #     x = eval_1d(xs, t)
-        #     y = eval_1d(ys, t)
-        #     return np.array([x, y])
 
         def eval(t):
             xy = [0, 0]
@@ -75,8 +59,6 @@ class CubicBSpline(object):
         if u < 2:
             return 2.0 / 3.0 - ((u - 4.0) * u + 4.0) * u / 2.0
         if u < 3:
-            # w = 4.0 - u
-            # return 2.0 / 3.0 - ((w - 4.0) * w + 4.0) * w / 2.0
             return ((u - 8.0) * u + 20.0) * u / 2.0 - 22.0 / 3.0
         if u < 4:
             w = 4.0 - u
