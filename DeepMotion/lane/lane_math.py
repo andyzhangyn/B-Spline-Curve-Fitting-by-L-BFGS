@@ -58,12 +58,13 @@ class LaneMath(object):
             #     lane = [[lanexs[k], laneys[k]] for k in range(len(lanexs))]
             #     lanes[id] = lane
 
-            # lane = lanes[id]
-            # lanexs, laneys = [p[0] for p in lane], [p[1] for p in lane]
-            # lanexs, laneys = self.RANSAC_Quadratic_Interpolation(lanexs, laneys)
-            # # plt.plot(lanexs, laneys, 'k,')
-            # lane = [[lanexs[k], laneys[k]] for k in range(len(lanexs))]
-            # lanes[id] = lane
+            lane = lanes[id]
+            lanexs, laneys = [p[0] for p in lane], [p[1] for p in lane]
+            lanexs, laneys = self.RANSAC_Quadratic_Interpolation(lanexs, laneys)
+            # lanexs, laneys = self.RANSAC_LeastSquare(lanexs, laneys)
+            # plt.plot(lanexs, laneys, 'k,')
+            lane = [[lanexs[k], laneys[k]] for k in range(len(lanexs))]
+            lanes[id] = lane
 
             dataxs, datays, use_PCA = self.get_data_sample(lane_mask, id, lanes)
             if use_PCA:
@@ -136,8 +137,8 @@ class LaneMath(object):
             for j in range(len(dataxs)):
                 p3 = np.array([dataxs[j], datays[j]])
                 min_point2curve = 1000000
-                for k in range(0, 120):
-                    point2curve = (polyx(k / 20.0 - 2) - p3[0]) ** 2 + (polyy(k / 20.0 - 2) - p3[1]) ** 2
+                for k in range(0, 60):
+                    point2curve = (polyx(k / 10.0 - 2) - p3[0]) ** 2 + (polyy(k / 10.0 - 2) - p3[1]) ** 2
                     if point2curve < min_point2curve:
                         min_point2curve = point2curve
                 min_point2curve = math.sqrt(min_point2curve)
@@ -158,7 +159,7 @@ class LaneMath(object):
         return best_dataxs, best_datays
 
 
-    def RANSAC_LeastSquare(self, dataxs, datays, niter=100, threshold=60, d=100):
+    def RANSAC_LeastSquare(self, dataxs, datays, niter=100, threshold=80, d=200):
         if len(dataxs) < 3:
             return dataxs, datays
         np.random.seed(0)
@@ -168,8 +169,8 @@ class LaneMath(object):
         for i in range(niter):
             newdataxs = []
             newdatays = []
-            rand1 = np.random.randint(0, len(dataxs))
-            rand2 = np.random.randint(0, len(dataxs))
+            rand1 = np.random.randint(0, len(dataxs) / 2)
+            rand2 = np.random.randint(len(dataxs) / 2, len(dataxs))
             while True:
                 if rand1 == rand2:
                     rand2 = np.random.randint(0, len(dataxs))
@@ -236,7 +237,7 @@ class LaneMath(object):
         d1 = (extreme[0] - pca.mean_[0]) ** 2 + (extreme[1] - pca.mean_[1]) ** 2
         d2 = (lanes[id][0][0] - pca.mean_[0]) ** 2 + (lanes[id][0][1] - pca.mean_[1]) ** 2
         d3 = (lanes[id][-1][0] - pca.mean_[0]) ** 2 + (lanes[id][-1][1] - pca.mean_[1]) ** 2
-        if d1 > d2 or d1 > d3 or pca.explained_variance_ratio_[0] > 0.998:
+        if d1 > d2 or d1 > d3 or pca.explained_variance_ratio_[0] > 0.998 or len(lanes[id]) < 1000:
         # if d1 > d2 or d1 > d3:
         # if len(lanes[id]) < 1
             data_density = 200
