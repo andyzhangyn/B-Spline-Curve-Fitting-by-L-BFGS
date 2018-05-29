@@ -21,7 +21,7 @@ class LaneMath(object):
 
     def show(self, data_path, axis=False):
         files = sorted(os.listdir(data_path))
-        # k = 0
+        k = 0
         # for file in files:
         #     lane_mask = np.load(os.path.join(data_path, file))
         #     self.show_graph(lane_mask, axis)
@@ -65,7 +65,10 @@ class LaneMath(object):
             # lane = [[lanexs[k], laneys[k]] for k in range(len(lanexs))]
             # lanes[id] = lane
 
-            dataxs, datays = self.get_data_sample(lane_mask, id, lanes)
+            dataxs, datays, use_PCA = self.get_data_sample(lane_mask, id, lanes)
+            if use_PCA:
+                plt.plot(dataxs, datays, "r")
+                continue
             # dataxs, datays = self.RANSAC_LeastSquare(dataxs, datays)
             # dataxs, datays = self.RANSAC_Quadratic_Interpolation(dataxs, datays)
             # plt.plot(dataxs, datays, 'b^')
@@ -127,7 +130,7 @@ class LaneMath(object):
             polyx = sp.interpolate.lagrange(range(3), [dataxs[rand1], dataxs[rand2], dataxs[rand3]])
             polyy = sp.interpolate.lagrange(range(3), [datays[rand1], datays[rand2], datays[rand3]])
             # ts = np.linspace(0, 2, 20)
-            # plt.plot([dataxs[rand1], dataxs[rand2], dataxs[rand3]], [datays[rand1], datays[rand2], datays[rand3]], "bs")
+            # plt.plot([dataxs[rand1], dataxs[rand2], dataxs[rand3]], [datays[rand1], datays[rand2], datays[rand3]])
             # plt.plot(polyx(ts), polyy(ts), "k")
             loss = 0
             for j in range(len(dataxs)):
@@ -256,7 +259,7 @@ class LaneMath(object):
             for i in range(newdata.shape[0]):
                 dataxs[i] = newdata[i, 0]
                 datays[i] = newdata[i, 1]
-            return np.array(dataxs), np.array(datays)
+            return np.array(dataxs), np.array(datays), True
 
         dataxs, datays = [], []
         data_density = 200
@@ -297,7 +300,7 @@ class LaneMath(object):
         # for i in range(n):
         #     data[i, 0] = dataxs[i]
         #     data[i, 1] = datays[i]
-        return np.array(dataxs, dtype=float), np.array(datays, dtype=float)
+        return np.array(dataxs, dtype=float), np.array(datays, dtype=float), False
 
 
 if __name__ == '__main__':
