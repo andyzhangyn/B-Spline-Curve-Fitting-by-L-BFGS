@@ -23,7 +23,6 @@ class ShowData(object):
             cv2.waitKey(1)
 
 
-
 if __name__ == '__main__':
     show_data = ShowData()
     show_data.show('/home/yuanning/DeepMotion/lane/data')

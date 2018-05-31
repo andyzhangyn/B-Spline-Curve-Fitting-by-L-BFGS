@@ -21,20 +21,23 @@ class LaneMath(object):
 
     def show(self, data_path, axis=False):
         files = sorted(os.listdir(data_path))
-        k = 0
-        for file in files:
-            lane_mask = np.load(os.path.join(data_path, file))
-            self.show_graph(lane_mask, axis)
-            print("File " + str(k) + " completed")
-            k = k + 1
+        # k = 0
+        # for file in files:
+        #     lane_mask = np.load(os.path.join(data_path, file))
+        #     self.show_graph(lane_mask, axis)
+        #     print("File " + str(k) + " completed")
+        #     k = k + 1
         # for k in range(0, 10):
         #     lane_mask = np.load(os.path.join(data_path, files[k]))
         #     self.show_graph(lane_mask, axis)
-        # lane_mask = np.load(os.path.join(data_path, files[5]))
-        # self.show_graph(lane_mask, axis)
+        lane_mask = np.load(os.path.join(data_path, files[5]))
+        self.show_graph(lane_mask, axis)
 
     def show_graph(self, lane_mask, axis=False):
         lane_mask = lane_mask[300:, 500:1400]
+        # plt.grid(True, linestyle="-.", color="r", linewidth="3")
+        height = lane_mask.shape[0]
+        width = lane_mask.shape[1]
         img = self.colorise(lane_mask)
         plt.imshow(img)
         # plt.show()
@@ -75,7 +78,7 @@ class LaneMath(object):
                 continue
 
             dataxs, datays = self.RANSAC_Quadratic_Interpolation(dataxs, datays, id=id)
-            # plt.plot(dataxs, datays, 'k,')
+            plt.plot(dataxs, datays, 'b^')
 
             # lane = lanes[id]
             # lanexs, laneys = [p[0] for p in lane], [p[1] for p in lane]
