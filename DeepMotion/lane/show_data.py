@@ -25,4 +25,4 @@ class ShowData(object):
 
 if __name__ == '__main__':
     show_data = ShowData()
-    show_data.show('/home/yuanning/DeepMotion/lane/data')
+    show_data.show('/home/yuanning/DeepMotion/Hard-data/data')

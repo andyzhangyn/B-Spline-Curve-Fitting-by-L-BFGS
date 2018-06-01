@@ -10,9 +10,10 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/DeepMotion$show_data.coverage" NAME="show_data Coverage Results" MODIFIED="1527559121346" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
-    <SUITE FILE_PATH="coverage/DeepMotion$lane_math.coverage" NAME="lane_math Coverage Results" MODIFIED="1527733088669" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
-    <SUITE FILE_PATH="coverage/DeepMotion$quadtree.coverage" NAME="quadtree Coverage Results" MODIFIED="1527820412528" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
+    <SUITE FILE_PATH="coverage/DeepMotion$sort_data.coverage" NAME="sort_data Coverage Results" MODIFIED="1527846356824" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
+    <SUITE FILE_PATH="coverage/DeepMotion$show_data.coverage" NAME="show_data Coverage Results" MODIFIED="1527835186717" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
+    <SUITE FILE_PATH="coverage/DeepMotion$lane_math.coverage" NAME="lane_math Coverage Results" MODIFIED="1527842224572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
+    <SUITE FILE_PATH="coverage/DeepMotion$quadtree.coverage" NAME="quadtree Coverage Results" MODIFIED="1527828352472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
     <SUITE FILE_PATH="coverage/DeepMotion$b_spline.coverage" NAME="b_spline Coverage Results" MODIFIED="1527124352934" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
   </component>
   <component name="FileEditorManager">
@@ -29,20 +30,17 @@
       <file leaf-file-name="lane_math.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lane/lane_math.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="652">
-              <caret line="363" column="23" lean-forward="true" selection-start-line="363" selection-start-column="23" selection-end-line="363" selection-end-column="23" />
-              <folding>
-                <element signature="e#139#148#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-4335">
+              <caret line="11" selection-start-line="11" selection-end-line="11" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="quadtree.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="quadtree.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lane/quadtree.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="163" column="27" lean-forward="true" selection-start-line="163" selection-start-column="27" selection-end-line="163" selection-end-column="27" />
+            <state relative-caret-position="472">
+              <caret line="248" column="21" selection-start-line="248" selection-start-column="21" selection-end-line="248" selection-end-column="21" />
               <folding>
                 <element signature="e#142#151#0" expanded="true" />
               </folding>
@@ -53,8 +51,8 @@
       <file leaf-file-name="show_data.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lane/show_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="56" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="56" />
+            <state relative-caret-position="195">
+              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
               <folding>
                 <element signature="e#143#152#0" expanded="true" />
               </folding>
@@ -65,8 +63,20 @@
       <file leaf-file-name="b_spline_model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lane/b_spline_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1635">
+            <state relative-caret-position="1372">
               <caret line="114" column="18" selection-start-line="114" selection-start-column="18" selection-end-line="114" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sort_data.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lane/sort_data.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="287">
+              <caret line="21" column="38" lean-forward="true" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+              <folding>
+                <element signature="e#142#151#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -80,6 +90,11 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>b^</find>
+    </findStrings>
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -87,9 +102,10 @@
         <option value="$PROJECT_DIR$/lane/L-BFGS.py" />
         <option value="$PROJECT_DIR$/lane/cubic_b_spline.py" />
         <option value="$PROJECT_DIR$/lane/b_spline_model.py" />
-        <option value="$PROJECT_DIR$/lane/lane_math.py" />
-        <option value="$PROJECT_DIR$/lane/show_data.py" />
         <option value="$PROJECT_DIR$/lane/quadtree.py" />
+        <option value="$PROJECT_DIR$/lane/show_data.py" />
+        <option value="$PROJECT_DIR$/lane/lane_math.py" />
+        <option value="$PROJECT_DIR$/lane/sort_data.py" />
       </list>
     </option>
   </component>
@@ -151,7 +167,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.quadtree">
+  <component name="RunManager" selected="Python.sort_data">
     <configuration name="b_spline" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="DeepMotion" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -228,17 +244,38 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="sort_data" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="DeepMotion" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/lane" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lane/sort_data.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <list>
       <item itemvalue="Python.b_spline" />
       <item itemvalue="Python.lane_math" />
       <item itemvalue="Python.show_data" />
       <item itemvalue="Python.quadtree" />
+      <item itemvalue="Python.sort_data" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.quadtree" />
+        <item itemvalue="Python.sort_data" />
         <item itemvalue="Python.lane_math" />
         <item itemvalue="Python.show_data" />
+        <item itemvalue="Python.quadtree" />
         <item itemvalue="Python.b_spline" />
       </list>
     </recent_temporary>
@@ -279,7 +316,7 @@
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1395477" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.41974628" />
+      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.42029786" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
@@ -315,9 +352,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5385">
           <caret line="366" column="21" lean-forward="true" selection-start-line="366" selection-start-column="21" selection-end-line="367" selection-end-column="43" />
-          <folding>
-            <element signature="e#139#148#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -376,9 +410,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4545">
           <caret line="310" column="28" lean-forward="true" selection-start-line="310" selection-start-column="28" selection-end-line="310" selection-end-column="28" />
-          <folding>
-            <element signature="e#139#148#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -410,9 +441,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1830">
           <caret line="129" column="50" lean-forward="true" selection-start-line="129" selection-start-column="50" selection-end-line="129" selection-end-column="50" />
-          <folding>
-            <element signature="e#139#148#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -427,9 +455,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="e#139#148#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -473,17 +498,10 @@
         <state relative-caret-position="-540" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lane/b_spline_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1635">
-          <caret line="114" column="18" selection-start-line="114" selection-start-column="18" selection-end-line="114" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lane/show_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="56" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="56" />
+        <state relative-caret-position="195">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
           <folding>
             <element signature="e#143#152#0" expanded="true" />
           </folding>
@@ -497,20 +515,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lane/lane_math.py">
+    <entry file="file://$PROJECT_DIR$/lane/quadtree.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="652">
-          <caret line="363" column="23" lean-forward="true" selection-start-line="363" selection-start-column="23" selection-end-line="363" selection-end-column="23" />
+        <state relative-caret-position="472">
+          <caret line="248" column="21" selection-start-line="248" selection-start-column="21" selection-end-line="248" selection-end-column="21" />
           <folding>
-            <element signature="e#139#148#0" expanded="true" />
+            <element signature="e#142#151#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lane/quadtree.py">
+    <entry file="file://$PROJECT_DIR$/lane/lane_math.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="163" column="27" lean-forward="true" selection-start-line="163" selection-start-column="27" selection-end-line="163" selection-end-column="27" />
+        <state relative-caret-position="-4335">
+          <caret line="11" selection-start-line="11" selection-end-line="11" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/b_spline_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1372">
+          <caret line="114" column="18" selection-start-line="114" selection-start-column="18" selection-end-line="114" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/sort_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="21" column="38" lean-forward="true" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
           <folding>
             <element signature="e#142#151#0" expanded="true" />
           </folding>

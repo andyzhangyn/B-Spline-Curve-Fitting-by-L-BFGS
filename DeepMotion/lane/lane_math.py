@@ -27,11 +27,11 @@ class LaneMath(object):
         #     self.show_graph(lane_mask, axis)
         #     print("File " + str(k) + " completed")
         #     k = k + 1
-        # for k in range(0, 10):
-        #     lane_mask = np.load(os.path.join(data_path, files[k]))
-        #     self.show_graph(lane_mask, axis)
-        lane_mask = np.load(os.path.join(data_path, files[5]))
-        self.show_graph(lane_mask, axis)
+        for k in range(0, 20):
+            lane_mask = np.load(os.path.join(data_path, files[k]))
+            self.show_graph(lane_mask, axis)
+        # lane_mask = np.load(os.path.join(data_path, files[407]))  # 401,403,404,405,407
+        # self.show_graph(lane_mask, axis)
 
     def show_graph(self, lane_mask, axis=False):
         lane_mask = lane_mask[300:, 500:1400]
@@ -47,8 +47,18 @@ class LaneMath(object):
         lane_ids = np.unique(lane_mask)
         lane_ids = lane_ids[1:]
         lanes = {}
+
+
+        # A = np.transpose(lane_mask)
+        # for id in lane_ids:
+        #     lanes[id] = np.transpose(np.nonzero(A == id))
+            # print(lanes[id])
+            # xs, ys = [pixel[0] for pixel in lanes[id]], [pixel[1] for pixel in lanes[id]]
+            # plt.plot(xs, ys, "r,")
+
         for id in lane_ids:
             lanes[id] = []
+            # print(id)
         for i in range(lane_mask.shape[0]):
             for j in range(lane_mask.shape[1]):
                 if lane_mask[i, j] in lane_ids:
@@ -72,13 +82,18 @@ class LaneMath(object):
             # lane = [[lanexs[k], laneys[k]] for k in range(len(lanexs))]
             # lanes[id] = lane
 
+            if len(lanes[id]) < 800:
+                continue
+
             dataxs, datays, use_PCA = self.get_data_sample(lane_mask, id, lanes)
             if use_PCA:
+                dataxs = np.array([dataxs[0], dataxs[-1]])
+                datays = np.array([datays[0], datays[-1]])
                 plt.plot(dataxs, datays, "r")
                 continue
 
             dataxs, datays = self.RANSAC_Quadratic_Interpolation(dataxs, datays, id=id)
-            plt.plot(dataxs, datays, 'b^')
+            # plt.plot(dataxs, datays, 'b^')
 
             # lane = lanes[id]
             # lanexs, laneys = [p[0] for p in lane], [p[1] for p in lane]
@@ -146,6 +161,11 @@ class LaneMath(object):
             rand1 = np.random.randint(0, n / 6)
             rand2 = np.random.randint(n / 6, 5 * n / 6)
             rand3 = np.random.randint(5 * n / 6, n)
+            #
+            # rand1 = np.random.randint(n)
+            # rand2 = np.random.randint(n)
+            # rand3 = np.random.randint(n)
+
             # rand1 = np.random.randint(0, n / 4)
             # rand2 = np.random.randint(n / 4, 3 * n / 4)
             # rand3 = np.random.randint(3 * n / 4, n)
@@ -293,7 +313,7 @@ class LaneMath(object):
         d1 = (extreme[0] - pca.mean_[0]) ** 2 + (extreme[1] - pca.mean_[1]) ** 2
         d2 = (lanes[id][0][0] - pca.mean_[0]) ** 2 + (lanes[id][0][1] - pca.mean_[1]) ** 2
         d3 = (lanes[id][-1][0] - pca.mean_[0]) ** 2 + (lanes[id][-1][1] - pca.mean_[1]) ** 2
-        if d1 > d2 or d1 > d3 or pca.explained_variance_ratio_[0] > 0.998 or len(lanes[id]) < 1000:
+        if d1 > d2 or d1 > d3 or pca.explained_variance_ratio_[0] > 0.9992 or len(lanes[id]) < 1000:
         # if d1 > d2 or d1 > d3:
         # if len(lanes[id]) < 1
             data_density = 30
@@ -363,6 +383,7 @@ class LaneMath(object):
 if __name__ == '__main__':
     start = time.time()
     lane_math = LaneMath()
-    lane_math.show('/home/yuanning/DeepMotion/lane/data', True)
+    # lane_math.show('/home/yuanning/DeepMotion/lane/data', True)  # 152 files
+    lane_math.show('/home/yuanning/DeepMotion/Hard-data/data', True)  # 410 files
     end = time.time()
     print("Time used: " + str(end - start))
