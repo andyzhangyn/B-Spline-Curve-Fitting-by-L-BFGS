@@ -84,7 +84,7 @@ class QuadTree(object):
             node = node.leaves[index]
         return node.points
 
-    def getneighbors(self, p):
+    def neighborsindex(self, p):
         x = p[0]
         y = p[1]
         h = self.height / float(2 ** self.max_level)
@@ -134,6 +134,59 @@ class QuadTree(object):
         y = y + h
         return [x, y]
 
+    def getpoints(self, index_list):
+        node = self.root
+        for index in index_list:
+            if node.leaves[index] is not 0:
+                node = node.leaves[index]
+            else:
+                return []
+        return node.points
+
+    def getneighbors(self, p):
+        neighborindex = self.neighborsindex(p)
+        neighbors = []
+        for index_list in neighborindex:
+            if self.getpoints(index_list) is not []:
+                neighbors.append(index_list)
+        return neighbors
+
+    def removepoint(self, p):
+        index_list = self.getindex(p[0], p[1])
+        node = self.root
+        for index in index_list:
+            if node.leaves[index] is not 0:
+                node = node.leaves[index]
+            else:
+                return None
+        node.points.remove(p)
+        if node.points is []:
+            node = node.parent
+            node.leaves[index_list[-1]] = 0
+
+    def removeleaf(self, index_list):
+        node = self.root
+        for index in index_list[:len(index_list)-1]:
+            if node.leaves[index] is not 0:
+                node = node.leaves[index]
+            else:
+                return None
+        node.leaves[index_list[-1]] = 0
+
+    def getorderedpoints(self, points):
+        ordered_points = []
+        for point in points:
+            self.store(point)
+            print(point)
+        while points is not []:
+            for i in range(len(points)):
+                print(self.getneighbors(points[i]))
+                if len(self.getneighbors(points[i])) < 2:
+                    ordered_points.append(points[i])
+                    self.removepoint(points[i])
+                    points = points[:i].extend(points[i + 1:])
+                    break
+        return ordered_points
 
 if __name__ == '__main__':
     start = time.time()
@@ -159,10 +212,13 @@ if __name__ == '__main__':
             if lane_mask[i, j] in lane_ids:
                 lanes[lane_mask[i, j]].append([j, i])
     points = []
-    for id in lane_ids:
-        dataxs, datays, use_PCA = LaneMath.get_data_sample(lane_mask, id, lanes)
-        points.extend([[dataxs[k], datays[k]] for k in range(len(dataxs))])
+    # for id in lane_ids:
+    #     dataxs, datays, use_PCA = LaneMath.get_data_sample(lane_mask, id, lanes)
+    #     points.extend([[dataxs[k], datays[k]] for k in range(len(dataxs))])
+    dataxs, datays, use_PCA = LaneMath.get_data_sample(lane_mask, 1, lanes)
+    points.extend([[dataxs[k], datays[k]] for k in range(len(dataxs))])
     qt = QuadTree(img.shape[0], img.shape[1])
+    # points = qt.getorderedpoints(points)
     # points = [[4, 8], [15, 16], [22, 42], [20, 30], [10, 10], [17, 22], [21, 38], [22, 48]]
     # qt = QuadTree(64, 64)
     # points = points[4:5]
@@ -175,7 +231,7 @@ if __name__ == '__main__':
         # center = qt.getcenter(qt.getindex(p[0], p[1]))
         # plt.plot(center[0], center[1], "b^")
         centers = []
-        for index_list in qt.getneighbors(p):
+        for index_list in qt.neighborsindex(p):
             centers.append(qt.getcenter(index_list))
         centerxs, centerys = [center[0] for center in centers], [center[1] for center in centers]
         plt.plot(centerxs, centerys, "r")
@@ -183,10 +239,12 @@ if __name__ == '__main__':
         center = qt.getcenter(qt.getindex(p[0], p[1]))
         # print(center)
         plt.plot(center[0], center[1], "b^")
+        print(qt.getpoints(qt.getindex(p[0], p[1])))
     # print()
     # for p in points:
     #     print(qt.getindex(p[0], p[1]))
     # print(qt.get([2, 1, 2, 1]))
+    print(qt.num_leaf)
     plt.show()
     end = time.time()
     print("Time used: " + str(end - start))
