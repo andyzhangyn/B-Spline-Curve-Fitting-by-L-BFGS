@@ -27,14 +27,14 @@ class SortData(object):
         initpoint = self.unsorted[np.random.randint(self.n)]
         # print(initpoint)
 
-        i = 10
+        i = 30
         while True:
             # print(i)
             i = i * 2
             neighbors = self.kdtree.query_ball_point(initpoint, i)
             # print(neighbors)
             # print(i)
-            if len(neighbors) >= 3 or i > 100:
+            if len(neighbors) >= 100 or i > 300:
                 break
             # print(step)
             # step = step * 2
@@ -104,21 +104,21 @@ class SortData(object):
 
         # step = self.step_size
         neighbors = []
-        i = 10
+        i = 30
         while True:
             # print(i)
-            i = i * 1.8
+            i = i * 1.5
             neighbors = self.kdtree.query_ball_point(p + unit_direction * i, i)
             # print(neighbors)
             # print(i)
-            if len(neighbors) >= 3 or i > 100:
+            if len(neighbors) >= 100 or i > 300:
                 break
             # print(step)
             # step = step * 2
             # print(step)
             # i = i + 2
         # print(neighbors)
-        if len(neighbors) < 3:
+        if len(neighbors) < 100:
             return None, None
         dists, ps = self.kdtree.query([p + unit_direction * i * 2])
         newp = self.unsorted[ps[0]]
