@@ -12,6 +12,7 @@ import time
 from sklearn.decomposition import PCA
 import math
 import scipy as sp
+import sort_data
 
 
 class LaneMath(object):
@@ -27,10 +28,10 @@ class LaneMath(object):
         #     self.show_graph(lane_mask, axis)
         #     print("File " + str(k) + " completed")
         #     k = k + 1
-        for k in range(0, 20):
+        for k in range(0, 10):
             lane_mask = np.load(os.path.join(data_path, files[k]))
             self.show_graph(lane_mask, axis)
-        # lane_mask = np.load(os.path.join(data_path, files[407]))  # 401,403,404,405,407
+        # lane_mask = np.load(os.path.join(data_path, files[0]))  # 401,403,404,405,407
         # self.show_graph(lane_mask, axis)
 
     def show_graph(self, lane_mask, axis=False):
@@ -82,6 +83,16 @@ class LaneMath(object):
             # lane = [[lanexs[k], laneys[k]] for k in range(len(lanexs))]
             # lanes[id] = lane
 
+            # lane = lanes[id]
+            # sd = sort_data.SortData(lane, step_size=30)
+            # lane = sd.getsorted()
+            # lanexs, laneys = [p[0] for p in lane], [p[1] for p in lane]
+            # lanexs, laneys = self.RANSAC_LeastSquare(lanexs, laneys)
+            # lanexs, laneys = self.RANSAC_LeastSquare(lanexs, laneys)
+            # plt.plot(lanexs, laneys, 'k,')
+            # lane = [[lanexs[k], laneys[k]] for k in range(len(lanexs))]
+            # lanes[id] = lane
+
             if len(lanes[id]) < 800:
                 continue
 
@@ -94,6 +105,11 @@ class LaneMath(object):
 
             dataxs, datays = self.RANSAC_Quadratic_Interpolation(dataxs, datays, id=id)
             # plt.plot(dataxs, datays, 'b^')
+
+            sd = sort_data.SortData([[dataxs[k], datays[k]] for k in range(len(dataxs))], step_size=100)
+            data = sd.getsorted()
+            plt.plot([p[0] for p in data], [p[1] for p in data], 'rs')
+            dataxs, datays = [p[0] for p in data], [p[1] for p in data]
 
             # lane = lanes[id]
             # lanexs, laneys = [p[0] for p in lane], [p[1] for p in lane]
@@ -111,7 +127,7 @@ class LaneMath(object):
             # dataxs, datays = self.RANSAC_LeastSquare(dataxs, datays)
             # dataxs, datays = self.RANSAC_Quadratic_Interpolation(dataxs, datays)
             # plt.plot(dataxs, datays, 'b^')
-            n = dataxs.shape[0]
+            n = len(dataxs)
             data = np.zeros((n, 2))
             for i in range(n):
                 data[i, 0] = dataxs[i]
@@ -158,9 +174,18 @@ class LaneMath(object):
             #     print("Iteration " + str(i))
             newdataxs = []
             newdatays = []
-            rand1 = np.random.randint(0, n / 6)
-            rand2 = np.random.randint(n / 6, 5 * n / 6)
-            rand3 = np.random.randint(5 * n / 6, n)
+            # print(n)
+            rand1 = 0
+            rand2 = 0
+            rand3 = 0
+            if n >= 6:
+                rand1 = np.random.randint(0, n / 6)
+                rand2 = np.random.randint(n / 6, 5 * n / 6)
+                rand3 = np.random.randint(5 * n / 6, n)
+            else:
+                rand1 = 0
+                rand2 = n / 2 - 1
+                rand3 = n - 1
             #
             # rand1 = np.random.randint(n)
             # rand2 = np.random.randint(n)
@@ -316,7 +341,7 @@ class LaneMath(object):
         if d1 > d2 or d1 > d3 or pca.explained_variance_ratio_[0] > 0.9992 or len(lanes[id]) < 1000:
         # if d1 > d2 or d1 > d3:
         # if len(lanes[id]) < 1
-            data_density = 30
+            data_density = 50
             # pca = PCA(n_components=1)
             # pca.fit(lanes[id])
             lane = np.unique(data_new)
@@ -339,7 +364,7 @@ class LaneMath(object):
             return np.array(dataxs), np.array(datays), True
 
         dataxs, datays = [], []
-        data_density = 200
+        data_density = 100
         k = 0
         lane = lanes[id]
         if abs(pca.components_[0][1]) / (abs(pca.components_[0][0]) + 0.1) < 1:
