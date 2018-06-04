@@ -44,11 +44,12 @@ class BSplineModel(object):
         # last_min_val = 1000
         # min_val = 800
         # loss_history = {}
-        xs = [point[0] for point in self.pts]
-        ys = [point[1] for point in self.pts]
+        A = np.transpose(self.pts)
+        xs = A[0]
+        ys = A[1]
         x = np.concatenate((xs, ys, self.T))
         # x = np.concatenate((xs, ys))
-        x, min_val, info = sp.optimize.fmin_l_bfgs_b(self.loss, x, approx_grad=True, m=8, maxfun=2000)
+        x, min_val, info = sp.optimize.fmin_l_bfgs_b(self.loss, x, approx_grad=True, m=8, maxfun=1000)
         # for i in range(self.niter):
         #     # start = time.time()
         #     # if self.id is None:

@@ -13,11 +13,13 @@ from sklearn.decomposition import PCA
 import math
 import scipy as sp
 import sort_data
+from scipy.spatial import distance
 
 
 class LaneMath(object):
 
     def __init__(self):
+        self.time = 0.0
         pass
 
     def show(self, data_path, axis=False):
@@ -28,18 +30,27 @@ class LaneMath(object):
         #     self.show_graph(lane_mask, axis)
         #     print("File " + str(k) + " completed")
         #     k = k + 1
-        # for k in range(0, 10):
+        # start = time.time()
+        # for k in range(0, 20):
         #     lane_mask = np.load(os.path.join(data_path, files[k]))
         #     self.show_graph(lane_mask, axis)
-        lane_mask = np.load(os.path.join(data_path, files[3]))
+        # end = time.time()
+        # print(end - start)
+        lane_mask = np.load(os.path.join(data_path, files[17]))
         self.show_graph(lane_mask, axis)
+        print(self.time)
 
     def show_graph(self, lane_mask, axis=False):
+        total_time = 0.0
+        # a = time.time()
         lane_mask = lane_mask[300:, 500:1400]
+        # b = time.time()
         # plt.grid(True, linestyle="-.", color="r", linewidth="3")
         height = lane_mask.shape[0]
         width = lane_mask.shape[1]
+        # a = time.time()
         img = self.colorise(lane_mask)
+        # b = time.time()
         plt.imshow(img)
         # plt.show()
         # plt.imshow(255 - 0 * img)
@@ -48,6 +59,7 @@ class LaneMath(object):
         lane_ids = np.unique(lane_mask)
         lane_ids = lane_ids[1:]
         lanes = {}
+        lanes_trans = {}
 
 
         # A = np.transpose(lane_mask)
@@ -57,23 +69,32 @@ class LaneMath(object):
             # xs, ys = [pixel[0] for pixel in lanes[id]], [pixel[1] for pixel in lanes[id]]
             # plt.plot(xs, ys, "r,")
 
-        for id in lane_ids:
-            lanes[id] = []
+        # for id in lane_ids:
+        #     lanes[id] = []
+        #     lanes_trans[id] = []
             # print(id)
-        a = time.time()
+        # a = time.time()
         # for i in range(lane_mask.shape[0]):
         #     for j in range(lane_mask.shape[1]):
         #         if lane_mask[i, j] in lane_ids:
         #             lanes[lane_mask[i, j]].append([j, i])
         A = np.transpose(lane_mask)
+        B = lane_mask
         for id in lane_ids:
-            lanes[id] = np.transpose(np.nonzero(A == id))
+            lanes_trans[id] = np.transpose(np.nonzero(A == id))
+            C = np.array(np.nonzero(B == id))
+            C[[0, 1]] = C[[1, 0]]
+            lanes[id] = np.transpose(C)
         #     print(lanes[id])
-        #     xs, ys = [pixel[0] for pixel in lanes[id]], [pixel[1] for pixel in lanes[id]]
+        #     xs, ys = [pixel[1] for pixel in lanes_trans[id]], [pixel[0] for pixel in lanes_trans[id]]
         #     plt.plot(xs, ys, "r,")
-        b = time.time()
-        print(b-a)
+        # b = time.time()
+        # print(b-a)
+        # b = time.time()
+        # a = time.time()
+        # print(lane_ids)
         for id in lane_ids:
+            a = time.time()
             # pca = PCA(n_components=1)
             # pca.fit(lanes[id])
             # if pca.explained_variance_ratio_[0] < 0.98 or True:
@@ -101,31 +122,43 @@ class LaneMath(object):
             # plt.plot(lanexs, laneys, 'k,')
             # lane = [[lanexs[k], laneys[k]] for k in range(len(lanexs))]
             # lanes[id] = lane
-            lane = lanes[id]
+            # lane = lanes[id]
 
-            if len(lane) < 800:
+            # a = time.time()
+            if len(lanes[id]) < 500:
                 continue
 
-
-            # data = lanes[id]
-            # pca = PCA(n_components=1)
-            # newdata = pca.fit_transform(data)
-            # # extreme = pca.inverse_transform(min(newdata))
-            # # # print(extreme)
-            # # # print(pca.mean_)
-            # # d1 = (extreme[0] - pca.mean_[0]) ** 2 + (extreme[1] - pca.mean_[1]) ** 2
-            # # d2 = (data[0][0] - pca.mean_[0]) ** 2 + (data[0][1] - pca.mean_[1]) ** 2
-            # # d3 = (data[-1][0] - pca.mean_[0]) ** 2 + (data[-1][1] - pca.mean_[1]) ** 2
-            # # if d1 > d2 or d1 > d3 or pca.explained_variance_ratio_[0] > 0.99:
+            # a = time.time()
+            data = lanes[id]
+            data_2 = lanes_trans[id]
+            pca = PCA(n_components=1)
+            newdata = pca.fit_transform(data)
+            extreme = pca.inverse_transform(min(newdata))
+            if abs(pca.components_[0][0]) > abs(pca.components_[0][1]):
+                data = lanes_trans[id]
+                data_2 = lanes[id]
+            # print(extreme)
+            # print(pca.mean_)
+            d1 = (extreme[0] - pca.mean_[0]) ** 2 + (extreme[1] - pca.mean_[1]) ** 2
+            d2 = (data[0][0] - pca.mean_[0]) ** 2 + (data[0][1] - pca.mean_[1]) ** 2
+            d3 = (data[-1][0] - pca.mean_[0]) ** 2 + (data[-1][1] - pca.mean_[1]) ** 2
+            d4 = (data_2[0][0] - pca.mean_[0]) ** 2 + (data_2[0][1] - pca.mean_[1]) ** 2
+            d5 = (data_2[-1][0] - pca.mean_[0]) ** 2 + (data_2[-1][1] - pca.mean_[1]) ** 2
+            # plt.plot([data[0][0]], [data[0][1]], "ro")
+            # plt.plot([data[-1][0]], [data[-1][1]], "bo")
+            # plt.plot([data_2[0][0]], [data_2[0][1]], "ro")
+            # plt.plot([data_2[-1][0]], [data_2[-1][1]], "bo")
+            # print(str(d1) + " " + str(d4) + " " + str(d5) + "\n")
+            if pca.explained_variance_ratio_[0] > 0.998 or ((d1 > d4 or d1 > d5) and (d1 > d2 or d1 > d3)) or len(data) < 1000:
             # if pca.explained_variance_ratio_[0] > 0.99:
-            #     mindata = min(newdata)
-            #     maxdata = max(newdata)
-            #     newdata = pca.inverse_transform([mindata, maxdata])
-            #
-            #     newdataxs = np.array([newdata[0][0], newdata[-1][0]])
-            #     newdatays = np.array([newdata[0][1], newdata[-1][1]])
-            #     plt.plot(newdataxs, newdatays, "r")
-            #     continue
+                mindata = min(newdata)
+                maxdata = max(newdata)
+                newdata = pca.inverse_transform([mindata, maxdata])
+
+                newdataxs = np.array([newdata[0][0], newdata[-1][0]])
+                newdatays = np.array([newdata[0][1], newdata[-1][1]])
+                plt.plot(newdataxs, newdatays, "r")
+                continue
             #
             # dataxs, datays, use_PCA = self.get_data_sample(lane_mask, id, lanes)
             # if use_PCA:
@@ -147,26 +180,38 @@ class LaneMath(object):
             #     plt.plot(newdataxs, newdatays, "r")
             #     continue
 
-            dataxs, datays = [p[0] for p in lane], [p[1] for p in lane]
+            # dataxs, datays = [p[0] for p in data], [p[1] for p in data]
+            A = np.transpose(data)
+            dataxs, datays = A[0], A[1]
+            # dataxs, datays = dataxs[::2], datays[::2]
 
-            # plt.plot(dataxs, datays, 'k,')
-            dataxs, datays = self.RANSAC_Quadratic_Interpolation(dataxs, datays, id=id)
+
             plt.plot(dataxs, datays, 'k,')
+            # a = time.time()
+            dataxs, datays = self.RANSAC_Quadratic_Interpolation(dataxs, datays, id=id)
+            # b = time.time()
+            # print(b-a)
+            # plt.plot(dataxs, datays, 'k,')
 
-            print("Checkpoint1")
+            # print("Checkpoint1")
+
             # plt.plot(dataxs, datays, 'b^')
 
-            sd = sort_data.SortData([[dataxs[k], datays[k]] for k in range(len(dataxs))], step_size=100)
+            # a = time.time()
+            sd = sort_data.SortData([[dataxs[k], datays[k]] for k in range(len(dataxs))], step_size=30, tolerance=50)
             data = sd.getsorted()
+            # b = time.time()
             plt.plot([p[0] for p in data], [p[1] for p in data], 'rs')
-            dataxs, datays = [p[0] for p in data], [p[1] for p in data]
+            A = np.transpose(data)
+            dataxs, datays = A[0], A[1]
             # plt.imshow(255 - np.zeros((lane_mask.shape[0], lane_mask.shape[1], 3)))
             # plt.show()
-            print("Checkpoint2")
+
+            # print("Checkpoint2")
 
             pca = PCA(n_components=1)
             newdata = pca.fit_transform(data)
-            if pca.explained_variance_ratio_[0] > 0.99:
+            if pca.explained_variance_ratio_[0] > 0.997:
                 newdata = pca.inverse_transform(newdata)
                 newdataxs = np.array([newdata[0][0], newdata[-1][0]])
                 newdatays = np.array([newdata[0][1], newdata[-1][1]])
@@ -189,21 +234,27 @@ class LaneMath(object):
             # dataxs, datays = self.RANSAC_LeastSquare(dataxs, datays)
             # dataxs, datays = self.RANSAC_Quadratic_Interpolation(dataxs, datays)
             # plt.plot(dataxs, datays, 'b^')
+            # a = time.time()
             n = len(dataxs)
+            # data = np.array(zip(dataxs, datays))
             data = np.zeros((n, 2))
             for i in range(n):
                 data[i, 0] = dataxs[i]
                 data[i, 1] = datays[i]
+
+            # b = time.time()
             numctrl = len(lanes[id]) / 800
             # print(dataxs)
             # print(datays)
             arr = [[dataxs[0], datays[0]], [dataxs[0], datays[0]], [dataxs[0], datays[0]]]
             # arr = [[data[0, 0], data[0, 1]], [data[0, 0], data[0, 1]], [data[0, 0], data[0, 1]]]
             # arr = [[dataxs[0], datays[0]], [dataxs[0], datays[0]]]
+            # a = time.time()
             for i in range(numctrl - 1):
                 arr.append([dataxs[(i + 1) * n / numctrl], datays[(i + 1) * n / numctrl]])
                 # plt.plot(dataxs[(i + 1) * n / numctrl], datays[(i + 1) * n / numctrl], 'ko')
                 # arr.append([dataxs[(i + 1) * n / numctrl], datays[(i + 1) * n / numctrl]])
+            # b = time.time()
             arr.append([dataxs[n - 1], datays[n - 1]])
             arr.append([dataxs[n - 1], datays[n - 1]])
             arr.append([dataxs[n - 1], datays[n - 1]])
@@ -211,12 +262,24 @@ class LaneMath(object):
             # arr.append([data[n - 1][0], data[n - 1][1]])
             ctrlpts = np.array(arr, dtype=np.float)
             # ctrlpts = np.array([[50, -50], [50, 50], [200, 100], [250, 300], [350, 500], [250, 600]], dtype=np.float)
-            model = b_spline_model.BSplineModel(data, ctrlpts, img=img, id=id)
-            # model.plot()
-            model.l_bfgs_fitting()
-        plt.show()
 
-    def RANSAC_Quadratic_Interpolation(self, dataxs, datays, niter=100, threshold=20, d=1000, id=None):
+            model = b_spline_model.BSplineModel(data, ctrlpts, img=img, id=id)
+
+            # model.plot()
+
+            # a = time.time()
+            model.l_bfgs_fitting()
+            b = time.time()
+            self.time = self.time + b - a
+            # print(b - a)
+            # total_time = total_time + b - a
+        plt.show()
+        # self.time = self.time + total_time
+        # b = time.time()
+        # self.time = self.time + b - a
+        # print("Total time used: " + str(total_time))
+
+    def RANSAC_Quadratic_Interpolation(self, dataxs, datays, niter=50, threshold=12, d=1000, id=None):
         if len(dataxs) < 4:
             return dataxs, datays
         np.random.seed(0)
@@ -240,10 +303,11 @@ class LaneMath(object):
             rand1 = 0
             rand2 = 0
             rand3 = 0
-            if n >= 6:
-                rand1 = np.random.randint(0, n / 6)
-                rand2 = np.random.randint(n / 6, 5 * n / 6)
-                rand3 = np.random.randint(5 * n / 6, n)
+            K = 6
+            if n >= K:
+                rand1 = np.random.randint(0, n / K)
+                rand2 = np.random.randint(n / K, (K - 1) * n / K)
+                rand3 = np.random.randint((K - 1) * n / K, n)
             else:
                 rand1 = 0
                 rand2 = n / 2 - 1
@@ -277,15 +341,24 @@ class LaneMath(object):
             # plt.plot(polyx(ts), polyy(ts), "k")
             # loss = 0
             gain = 0
-            M = 5
+            M = 20
             for j in range(len(dataxs)):
                 p3 = np.array([dataxs[j], datays[j]])
-                min_point2curve = 100000000
-                for k in range(0, 4 * M + 1):
-                    point2curve = (polyx(k / float(M) - 1) - p3[0]) ** 2 + (polyy(k / float(M) - 1) - p3[1]) ** 2
-                    if point2curve < min_point2curve:
-                        min_point2curve = point2curve
-                min_point2curve = math.sqrt(min_point2curve)
+
+                A = np.linspace(-1, 3, M * 4)
+                B = np.transpose(np.array([polyx(A), polyy(A)]))
+                min_point2curve = min(min(distance.cdist([p3], B)))
+                # print(min_point2curve)
+
+                # min_point2curve = 100000000
+                # for k in range(0, 4 * M + 1):
+                #     K = k / float(M) - 1
+                #     point2curve = (polyx(K) - p3[0]) ** 2 + (polyy(K) - p3[1]) ** 2
+                #     if point2curve < min_point2curve:
+                #         min_point2curve = point2curve
+                # min_point2curve = math.sqrt(min_point2curve)
+
+
                 # if min_point2curve > threshold:
                 #     min_point2curve = 2 * threshold
                 if min_point2curve <= threshold:
@@ -297,14 +370,14 @@ class LaneMath(object):
                 #     loss = loss + 1
             newdataxs = np.array(newdataxs)
             newdatays = np.array(newdatays)
-            if len(newdataxs) >= d:
+            if len(newdataxs) >= 5 * n / 6:
                 return newdataxs, newdatays
             # if loss < min_loss:
             #     min_loss = loss
             #     best_dataxs = newdataxs
             #     best_datays = newdatays
-            #     best_polyx = polyx
-            #     best_polyy = polyy
+                best_polyx = polyx
+                best_polyy = polyy
             if gain > max_gain:
                 max_gain = gain
                 best_dataxs = newdataxs
@@ -313,7 +386,8 @@ class LaneMath(object):
                 best_polyy = polyy
             if gain == n:
                 break
-        ts = np.linspace(0, 2, 20)
+        print("Hello")
+        ts = np.linspace(-1, 3, 40)
         if best_polyx is None or best_polyy is None:
             print("Lane " + str(id) + " RANSAC failed")
         else:
@@ -498,6 +572,7 @@ class LaneMath(object):
 if __name__ == '__main__':
     start = time.time()
     lane_math = LaneMath()
+    # start = time.time()
     # lane_math.show('/home/yuanning/DeepMotion/lane/data', True)  # 152 files
     lane_math.show('/home/yuanning/DeepMotion/Hard-data/data', True)  # 410 files
     end = time.time()

@@ -16,7 +16,7 @@ from sklearn.decomposition import PCA
 
 class SortData(object):
 
-    def __init__(self, points, step_size=6):
+    def __init__(self, points, step_size=30, tolerance=50):
         self.step_size = step_size
         np.random.seed(0)
         self.unsorted = np.array(points)
@@ -24,17 +24,19 @@ class SortData(object):
         self.sortedxs = []
         self.sortedys = []
         self.kdtree = kdtree.KDTree(points)
-        initpoint = self.unsorted[np.random.randint(self.n)]
+        self.tolerance = tolerance
+        # initpoint = self.unsorted[np.random.randint(self.n)]
+        initpoint = self.unsorted[self.n / 2]
         # print(initpoint)
 
-        i = 30
+        i = self.step_size
         while True:
             # print(i)
             i = i * 2
             neighbors = self.kdtree.query_ball_point(initpoint, i)
             # print(neighbors)
             # print(i)
-            if len(neighbors) >= 100 or i > 300:
+            if len(neighbors) >= self.tolerance or i > self.step_size * 3:
                 break
             # print(step)
             # step = step * 2
@@ -43,12 +45,13 @@ class SortData(object):
 
         # neighbors = self.kdtree.query_ball_point(initpoint, self.step_size)
         # print(neighbors)
-        pca = PCA(n_components=1)
+        pca = PCA(n_components=2)
         # pts = self.unsorted[neighbors]
         # plt.plot([p[0] for p in pts], [p[1] for p in pts], 'ro')
         pca.fit(self.unsorted[neighbors])
         initdirection1 = pca.components_[0]
         initdirection2 = -initdirection1
+        # temp = pca.transform(self.unsorted[neighbors])
         p = initpoint
         # print(p)
         d = initdirection1
@@ -104,23 +107,27 @@ class SortData(object):
 
         # step = self.step_size
         neighbors = []
-        i = 30
+        i = self.step_size
         while True:
             # print(i)
-            i = i * 1.5
-            neighbors = self.kdtree.query_ball_point(p + unit_direction * i, i)
+            i = i * 1.1
+            neighbors = self.kdtree.query_ball_point(p + unit_direction * i * 1.5, i)
             # print(neighbors)
             # print(i)
-            if len(neighbors) >= 100 or i > 300:
+            if len(neighbors) == 0:
+                # print("Hello")
+                return None, None
+
+            if len(neighbors) >= self.tolerance or i > self.step_size * 3:
                 break
             # print(step)
             # step = step * 2
             # print(step)
             # i = i + 2
         # print(neighbors)
-        if len(neighbors) < 100:
+        if len(neighbors) < self.tolerance:
             return None, None
-        dists, ps = self.kdtree.query([p + unit_direction * i * 2])
+        dists, ps = self.kdtree.query([p + unit_direction * i * 1.2])
         newp = self.unsorted[ps[0]]
         pca = PCA(n_components=1)
         pca.fit(self.unsorted[neighbors])
