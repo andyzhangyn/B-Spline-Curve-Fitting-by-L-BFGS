@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# Author: Kuiyuan Yang (kuiyuanyang@deepmotion.ai)
+# Author: Yuanning Zhang (yuanningzhang@deepmotion.ai)
 # Copyright (c) 2018-present, DeepMotion
 
 
@@ -14,6 +14,7 @@ import math
 import scipy as sp
 import sort_data
 from scipy.spatial import distance
+from timeit import default_timer as timer
 
 
 class LaneMath(object):
@@ -31,14 +32,15 @@ class LaneMath(object):
         #     print("File " + str(k) + " completed")
         #     k = k + 1
         # start = time.time()
-        # for k in range(0, 20):
+        # for k in range(400, 410):
         #     lane_mask = np.load(os.path.join(data_path, files[k]))
         #     self.show_graph(lane_mask, axis)
         # end = time.time()
         # print(end - start)
-        lane_mask = np.load(os.path.join(data_path, files[17]))
+        lane_mask = np.load(os.path.join(data_path, files[4]))
         self.show_graph(lane_mask, axis)
-        print(self.time)
+        print("Time used for subprogram: " + str(self.time))
+        return self.time
 
     def show_graph(self, lane_mask, axis=False):
         total_time = 0.0
@@ -94,7 +96,8 @@ class LaneMath(object):
         # a = time.time()
         # print(lane_ids)
         for id in lane_ids:
-            a = time.time()
+            a = timer()
+            # a = time.time()
             # pca = PCA(n_components=1)
             # pca.fit(lanes[id])
             # if pca.explained_variance_ratio_[0] < 0.98 or True:
@@ -125,7 +128,7 @@ class LaneMath(object):
             # lane = lanes[id]
 
             # a = time.time()
-            if len(lanes[id]) < 500:
+            if len(lanes[id]) < 800:
                 continue
 
             # a = time.time()
@@ -149,7 +152,8 @@ class LaneMath(object):
             # plt.plot([data_2[0][0]], [data_2[0][1]], "ro")
             # plt.plot([data_2[-1][0]], [data_2[-1][1]], "bo")
             # print(str(d1) + " " + str(d4) + " " + str(d5) + "\n")
-            if pca.explained_variance_ratio_[0] > 0.998 or ((d1 > d4 or d1 > d5) and (d1 > d2 or d1 > d3)) or len(data) < 1000:
+            if pca.explained_variance_ratio_[0] > 0.996 or \
+                    ((d1 > d4 or d1 > d5) and (d1 > d2 or d1 > d3)) or len(data) < 1000:
             # if pca.explained_variance_ratio_[0] > 0.99:
                 mindata = min(newdata)
                 maxdata = max(newdata)
@@ -186,22 +190,26 @@ class LaneMath(object):
             # dataxs, datays = dataxs[::2], datays[::2]
 
 
-            plt.plot(dataxs, datays, 'k,')
+            # plt.plot(dataxs, datays, 'b,')
             # a = time.time()
             dataxs, datays = self.RANSAC_Quadratic_Interpolation(dataxs, datays, id=id)
             # b = time.time()
             # print(b-a)
-            # plt.plot(dataxs, datays, 'k,')
+            # plt.plot(dataxs, datays, 'b,')
 
             # print("Checkpoint1")
 
             # plt.plot(dataxs, datays, 'b^')
 
             # a = time.time()
+
+
             sd = sort_data.SortData([[dataxs[k], datays[k]] for k in range(len(dataxs))], step_size=30, tolerance=50)
             data = sd.getsorted()
+
+
             # b = time.time()
-            plt.plot([p[0] for p in data], [p[1] for p in data], 'rs')
+            # plt.plot([p[0] for p in data], [p[1] for p in data], 'rs')
             A = np.transpose(data)
             dataxs, datays = A[0], A[1]
             # plt.imshow(255 - np.zeros((lane_mask.shape[0], lane_mask.shape[1], 3)))
@@ -211,11 +219,13 @@ class LaneMath(object):
 
             pca = PCA(n_components=1)
             newdata = pca.fit_transform(data)
-            if pca.explained_variance_ratio_[0] > 0.997:
+            if len(data) < 5 or pca.explained_variance_ratio_[0] > 0.999:
                 newdata = pca.inverse_transform(newdata)
                 newdataxs = np.array([newdata[0][0], newdata[-1][0]])
                 newdatays = np.array([newdata[0][1], newdata[-1][1]])
                 plt.plot(newdataxs, newdatays, "r")
+                # b = timer()
+                # self.time = self.time + b - a
                 continue
 
             # lane = lanes[id]
@@ -237,10 +247,15 @@ class LaneMath(object):
             # a = time.time()
             n = len(dataxs)
             # data = np.array(zip(dataxs, datays))
-            data = np.zeros((n, 2))
-            for i in range(n):
-                data[i, 0] = dataxs[i]
-                data[i, 1] = datays[i]
+
+
+            # data = np.zeros((n, 2))
+            # for i in range(n):
+            #     data[i, 0] = dataxs[i]
+            #     data[i, 1] = datays[i]
+
+
+            data = np.transpose(np.array([dataxs, datays]))
 
             # b = time.time()
             numctrl = len(lanes[id]) / 800
@@ -269,7 +284,7 @@ class LaneMath(object):
 
             # a = time.time()
             model.l_bfgs_fitting()
-            b = time.time()
+            b = timer()
             self.time = self.time + b - a
             # print(b - a)
             # total_time = total_time + b - a
@@ -279,7 +294,7 @@ class LaneMath(object):
         # self.time = self.time + b - a
         # print("Total time used: " + str(total_time))
 
-    def RANSAC_Quadratic_Interpolation(self, dataxs, datays, niter=50, threshold=12, d=1000, id=None):
+    def RANSAC_Quadratic_Interpolation(self, dataxs, datays, niter=100, threshold=12, d=1000, id=None):
         if len(dataxs) < 4:
             return dataxs, datays
         np.random.seed(0)
@@ -292,6 +307,7 @@ class LaneMath(object):
         best_polyy = None
         # if id == 1:
         #     niter = 30
+        num = 0
         for i in range(niter):
             # if id is not None:
             #     print("Lane " + str(id) + ", Iteration " + str(i))
@@ -341,11 +357,11 @@ class LaneMath(object):
             # plt.plot(polyx(ts), polyy(ts), "k")
             # loss = 0
             gain = 0
-            M = 20
+            M = 15
             for j in range(len(dataxs)):
                 p3 = np.array([dataxs[j], datays[j]])
 
-                A = np.linspace(-1, 3, M * 4)
+                A = np.linspace(-1, 3, 4 * M)
                 B = np.transpose(np.array([polyx(A), polyy(A)]))
                 min_point2curve = min(min(distance.cdist([p3], B)))
                 # print(min_point2curve)
@@ -370,7 +386,7 @@ class LaneMath(object):
                 #     loss = loss + 1
             newdataxs = np.array(newdataxs)
             newdatays = np.array(newdatays)
-            if len(newdataxs) >= 5 * n / 6:
+            if len(newdataxs) >= 5 * n / 6 or num >= 30:
                 return newdataxs, newdatays
             # if loss < min_loss:
             #     min_loss = loss
@@ -379,6 +395,8 @@ class LaneMath(object):
                 best_polyx = polyx
                 best_polyy = polyy
             if gain > max_gain:
+                if gain - max_gain > 30:
+                    num = 0
                 max_gain = gain
                 best_dataxs = newdataxs
                 best_datays = newdatays
@@ -386,12 +404,13 @@ class LaneMath(object):
                 best_polyy = polyy
             if gain == n:
                 break
+            num = num + 1
         print("Hello")
-        ts = np.linspace(-1, 3, 40)
-        if best_polyx is None or best_polyy is None:
-            print("Lane " + str(id) + " RANSAC failed")
-        else:
-            plt.plot(best_polyx(ts), best_polyy(ts), "k")
+        # ts = np.linspace(-1, 3, 40)
+        # if best_polyx is None or best_polyy is None:
+        #     print("Lane " + str(id) + " RANSAC failed")
+        # else:
+        #     plt.plot(best_polyx(ts), best_polyy(ts), "k")
         return best_dataxs, best_datays
 
 
@@ -574,6 +593,7 @@ if __name__ == '__main__':
     lane_math = LaneMath()
     # start = time.time()
     # lane_math.show('/home/yuanning/DeepMotion/lane/data', True)  # 152 files
-    lane_math.show('/home/yuanning/DeepMotion/Hard-data/data', True)  # 410 files
+    sub = lane_math.show('/home/yuanning/DeepMotion/Hard-data/data', True)  # 410 files
     end = time.time()
-    print("Time used: " + str(end - start))
+    print("Time used for entire program: " + str(end - start))
+    print("Subprogram used {}% of total time".format(100 * sub / (end - start)))

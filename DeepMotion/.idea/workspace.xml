@@ -10,9 +10,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/DeepMotion$sort_data.coverage" NAME="sort_data Coverage Results" MODIFIED="1528096968585" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
+    <SUITE FILE_PATH="coverage/DeepMotion$sort_data.coverage" NAME="sort_data Coverage Results" MODIFIED="1528164539631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
     <SUITE FILE_PATH="coverage/DeepMotion$show_data.coverage" NAME="show_data Coverage Results" MODIFIED="1527835186717" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
-    <SUITE FILE_PATH="coverage/DeepMotion$lane_math.coverage" NAME="lane_math Coverage Results" MODIFIED="1528105086997" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
+    <SUITE FILE_PATH="coverage/DeepMotion$lane_math.coverage" NAME="lane_math Coverage Results" MODIFIED="1528172570426" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
     <SUITE FILE_PATH="coverage/DeepMotion$quadtree.coverage" NAME="quadtree Coverage Results" MODIFIED="1527828352472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
     <SUITE FILE_PATH="coverage/DeepMotion$b_spline.coverage" NAME="b_spline Coverage Results" MODIFIED="1527124352934" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
   </component>
@@ -22,7 +22,7 @@
         <entry file="file://$PROJECT_DIR$/lane/show_data.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
-              <caret line="20" column="58" lean-forward="true" selection-start-line="20" selection-start-column="58" selection-end-line="20" selection-end-column="58" />
+              <caret line="20" column="58" selection-start-line="20" selection-start-column="58" selection-end-line="20" selection-end-column="58" />
               <folding>
                 <element signature="e#143#152#0" expanded="true" />
               </folding>
@@ -33,7 +33,7 @@
       <file leaf-file-name="b_spline_model.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lane/b_spline_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
+            <state relative-caret-position="390">
               <caret line="31" selection-start-line="31" selection-end-line="31" />
             </state>
           </provider>
@@ -42,8 +42,8 @@
       <file leaf-file-name="lane_math.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lane/lane_math.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="93" column="23" lean-forward="true" selection-start-line="93" selection-start-column="23" selection-end-line="93" selection-end-column="23" />
+            <state relative-caret-position="300">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
               <folding>
                 <element signature="e#139#148#0" expanded="true" />
               </folding>
@@ -54,8 +54,8 @@
       <file leaf-file-name="sort_data.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lane/sort_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="502">
-              <caret line="129" column="67" selection-start-line="129" selection-start-column="67" selection-end-line="129" selection-end-column="67" />
+            <state relative-caret-position="-608">
+              <caret line="82" column="21" lean-forward="true" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
               <folding>
                 <element signature="e#142#151#0" expanded="true" />
               </folding>
@@ -86,8 +86,8 @@
         <option value="$PROJECT_DIR$/lane/cubic_b_spline.py" />
         <option value="$PROJECT_DIR$/lane/quadtree.py" />
         <option value="$PROJECT_DIR$/lane/show_data.py" />
-        <option value="$PROJECT_DIR$/lane/sort_data.py" />
         <option value="$PROJECT_DIR$/lane/b_spline_model.py" />
+        <option value="$PROJECT_DIR$/lane/sort_data.py" />
         <option value="$PROJECT_DIR$/lane/lane_math.py" />
       </list>
     </option>
@@ -112,7 +112,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -129,6 +128,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -296,22 +296,22 @@
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3291536" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3291536" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.0" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.32984003" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.42029786" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39916405" />
-      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="8" weight="0.3291536" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Coverage" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="right" id="Coverage" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="8" weight="0.3291536" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,6 +333,43 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/lane/show_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="20" column="58" selection-start-line="20" selection-start-column="58" selection-end-line="20" selection-end-column="58" />
+          <folding>
+            <element signature="e#143#152#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/b_spline_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/sort_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1815">
+          <caret line="129" column="67" selection-start-line="129" selection-start-column="67" selection-end-line="129" selection-end-column="67" />
+          <folding>
+            <element signature="e#142#151#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lane/lane_math.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1800">
+          <caret line="129" lean-forward="true" selection-start-line="129" selection-end-line="129" />
+          <folding>
+            <element signature="e#139#148#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lane/show_data.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -610,37 +647,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lane/sort_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="129" column="67" selection-start-line="129" selection-start-column="67" selection-end-line="129" selection-end-column="67" />
-          <folding>
-            <element signature="e#142#151#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lane/show_data.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
-          <caret line="20" column="58" lean-forward="true" selection-start-line="20" selection-start-column="58" selection-end-line="20" selection-end-column="58" />
+          <caret line="20" column="58" selection-start-line="20" selection-start-column="58" selection-end-line="20" selection-end-column="58" />
           <folding>
             <element signature="e#143#152#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lane/sort_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-608">
+          <caret line="82" column="21" lean-forward="true" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
+          <folding>
+            <element signature="e#142#151#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lane/b_spline_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
+        <state relative-caret-position="390">
           <caret line="31" selection-start-line="31" selection-end-line="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lane/lane_math.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="93" column="23" lean-forward="true" selection-start-line="93" selection-start-column="23" selection-end-line="93" selection-end-column="23" />
+        <state relative-caret-position="300">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
           <folding>
             <element signature="e#139#148#0" expanded="true" />
           </folding>
