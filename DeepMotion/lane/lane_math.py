@@ -86,9 +86,9 @@ class LaneMath(object):
                 plt.plot(newdataxs, newdatays, "r")
                 continue
             A = np.transpose(data)
-            dataxs, datays = self.RANSAC_Quadratic_Interpolation(dataxs, datays, id=id)
+            dataxs, datays = self.RANSAC_Quadratic_Interpolation(A[0], A[1], id=id)
             # plt.plot(dataxs, datays, 'b,')
-            sd = sort_data.SortData([[dataxs[k], datays[k]] for k in range(len(dataxs))], step_size=30, tolerance=50)
+            sd = sort_data.SortData(np.transpose(np.array([dataxs, datays])), step_size=30, tolerance=50)
             data = sd.getsorted()
             # plt.plot([p[0] for p in data], [p[1] for p in data], 'rs')
             A = np.transpose(data)
