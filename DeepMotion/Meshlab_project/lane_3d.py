@@ -11,7 +11,7 @@ from scipy.spatial import distance
 import scipy as sp
 from timeit import default_timer as timer
 import b_spline_model_3d
-# import meshlabxml as mlx
+import meshlabxml as mlx
 import sort_3d_data
 import cv2
 import matplotlib.pyplot as plt
@@ -26,8 +26,8 @@ class Lane3D():
         pca = PCA(n_components=1)
         pca.fit(data)
         if not (len(data) < 5 or pca.explained_variance_ratio_[0] > 0.999):
-            # data = self.RANSAC_Linear_Interpolation(data)
-            data = self.RANSAC_Quadratic_Interpolation(data)
+            data = self.RANSAC_Linear_Interpolation(data)
+            # data = self.RANSAC_Quadratic_Interpolation(data)
         s3dd = sort_3d_data.Sort3DData(data, step_size=5, tolerance=10)
         data = s3dd.getsorted()
         pca = PCA(n_components=1)
@@ -236,39 +236,43 @@ def write_off(verts, file_path):
 
 if __name__ == '__main__':
     start = timer()
-    data_path = "/home/yuanning/DeepMotion/pointclouds"
-    files = sorted(os.listdir(data_path))
-    n = len(files)
 
-    for i in range(0, 20):
-        lane_mask = read_off(os.path.join(data_path, files[i]))  # 657 files
+    # data_path = "/home/yuanning/DeepMotion/pointclouds"
+    # files = sorted(os.listdir(data_path))
+    # n = len(files)
+    #
+    # for i in range(0, 20):
+    #     lane_mask = read_off(os.path.join(data_path, files[i]))  # 657 files
+    #
+    #     print(lane_mask)
+    #     print(lane_mask.shape)
+    #
+    #     lane3d = Lane3D()
+    #     curve = lane3d.fit(lane_mask, displayed_points=1000)
+    #
+    #     print(curve)
+    #     print(curve.shape)
+    #
+    #     # curve_path = "/home/yuanning/DeepMotion/curves/curve_{}".format(files[i])
+    #     # write_off(curve, curve_path)
+    #
+    #     plt.plot(np.transpose(lane_mask)[0], np.transpose(lane_mask)[1], "b,")
+    #     plt.plot(np.transpose(curve)[0], np.transpose(curve)[1], 'r')
+    #     plt.show()
 
-        print(lane_mask)
-        print(lane_mask.shape)
+    print(os.environ['PATH'])
 
-        lane3d = Lane3D()
-        curve = lane3d.fit(lane_mask, displayed_points=1000)
-
-        print(curve)
-        print(curve.shape)
-
-        # curve_path = "/home/yuanning/DeepMotion/curves/curve_{}".format(files[i])
-        # write_off(curve, curve_path)
-
-        plt.plot(np.transpose(lane_mask)[0], np.transpose(lane_mask)[1], "b,")
-        plt.plot(np.transpose(curve)[0], np.transpose(curve)[1], 'r')
-        plt.show()
-
-    # meshlabserver_path = '/home/yuanning/snap/meshlab/4'
-    # os.environ['PATH'] = meshlabserver_path + os.pathsep + os.environ['PATH']
+    meshlabserver_path = '/snap/meshlab/4/bin'
+    os.environ['PATH'] = meshlabserver_path + os.pathsep + os.environ['PATH']
+    # os.environ['PATH'] = '/snap/meshlab/current/lib' + os.pathsep + os.environ['PATH']
     # orange_cube = mlx.FilterScript(file_out='orange_cube.ply', ml_version='2016.12')
     # mlx.create.cube(orange_cube, size=[3.0, 4.0, 5.0], center=True, color='orange')
     # mlx.transform.rotate(orange_cube, axis='x', angle=45)
     # mlx.transform.rotate(orange_cube, axis='y', angle=45)
     # mlx.transform.translate(orange_cube, value=[0, 5.0, 0])
     # orange_cube.run_script()
-    # lane3d = Lane3D()
-    # aabb, geometry, topology = mlx.files.measure_all('bunny', ml_version='2016.12')
+
+    aabb, geometry, topology = mlx.files.measure_all('bunny', ml_version='2016.12')
 
     end = timer()
     print("Total time used: {}".format(end - start))
