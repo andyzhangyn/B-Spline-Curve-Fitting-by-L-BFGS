@@ -252,29 +252,29 @@ if __name__ == '__main__':
     start = timer()
 
 
-    # data_path = "/home/yuanning/DeepMotion/pointclouds"
-    # files = sorted(os.listdir(data_path))
-    # n = len(files)
-    #
-    # for i in range(n):
-    #     lane_mask = read_off(os.path.join(data_path, files[i]))  # 657 files
-    #
-    #     # print(lane_mask)
-    #     # print(lane_mask.shape)
-    #
-    #     lane3d = Lane3D()
-    #     curve = lane3d.fit(lane_mask, displayed_points=1000)
-    #
-    #     # print(curve)
-    #     # print(curve.shape)
-    #
-    #     curve_path = "/home/yuanning/DeepMotion/curves/curve_{}".format(files[i])
-    #     write_off(curve, curve_path)
-    #     print(files[i])
-    #
-    #     # plt.plot(np.transpose(lane_mask)[0], np.transpose(lane_mask)[1], "b,")
-    #     # plt.plot(np.transpose(curve)[0], np.transpose(curve)[1], 'r')
-    #     # plt.show()
+    data_path = "/home/yuanning/DeepMotion/pointclouds"
+    files = sorted(os.listdir(data_path))
+    n = len(files)
+
+    for i in range(n):
+        lane_mask = read_off(os.path.join(data_path, files[i]))  # 657 files
+
+        # print(lane_mask)
+        # print(lane_mask.shape)
+
+        lane3d = Lane3D()
+        curve = lane3d.fit(lane_mask, displayed_points=1000)
+
+        # print(curve)
+        # print(curve.shape)
+
+        curve_path = "/home/yuanning/DeepMotion/curves/curve_{}".format(files[i])
+        write_off(curve, curve_path)
+        print(files[i])
+
+        # plt.plot(np.transpose(lane_mask)[0], np.transpose(lane_mask)[1], "b,")
+        # plt.plot(np.transpose(curve)[0], np.transpose(curve)[1], 'r')
+        # plt.show()
 
 
     # lane_mask = read_off(os.path.join(data_path, "05_00000016.off"))
@@ -302,7 +302,7 @@ if __name__ == '__main__':
     # test = mlx.FilterScript(file_in="/home/yuanning/DeepMotion/pointclouds/05_00000016.off")
     # test.run_script()
 
-    aabb, geometry, topology = mlx.files.measure_all("/home/yuanning/DeepMotion/pointclouds/00_00000000.off")
+    # aabb, geometry, topology = mlx.files.measure_all("/home/yuanning/DeepMotion/pointclouds/00_00000000.off")
 
     end = timer()
     print("Total time used: {}".format(end - start))
