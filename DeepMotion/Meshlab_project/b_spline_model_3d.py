@@ -27,7 +27,7 @@ class BSplineModel3D(object):
         self.id = id
 
     def l_bfgs_fitting(self, displayed_points=100):
-        print(self.pts)
+        # print(self.pts)
         A = np.transpose(self.pts)
         xs = A[0]
         ys = A[1]

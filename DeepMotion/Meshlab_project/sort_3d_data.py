@@ -13,7 +13,7 @@ from sklearn.decomposition import PCA
 
 class Sort3DData(object):
 
-    def __init__(self, points, step_size=30, tolerance=50):
+    def __init__(self, points, step_size=30, tolerance=20):
         self.step_size = step_size
         np.random.seed(0)
         self.unsorted = np.array(points)
@@ -28,7 +28,7 @@ class Sort3DData(object):
         while True:
             i = i * 1.1
             neighbors = self.kdtree.query_ball_point(initpoint, i)
-            if len(neighbors) >= self.tolerance or i > self.step_size * 10:
+            if len(neighbors) >= self.tolerance or i > self.step_size * 50:
                 break
         pca = PCA(n_components=1)
         pca.fit(self.unsorted[neighbors])
@@ -82,7 +82,7 @@ class Sort3DData(object):
             neighbors = self.kdtree.query_ball_point(p + direction * i * 1.5, i)
             if len(neighbors) == 0:
                 return None, None
-            if len(neighbors) >= self.tolerance or i > self.step_size * 10:
+            if len(neighbors) >= self.tolerance or i > self.step_size * 50:
                 break
         if len(neighbors) < self.tolerance:
             return None, None

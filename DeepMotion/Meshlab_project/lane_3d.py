@@ -15,6 +15,7 @@ import meshlabxml as mlx
 import sort_3d_data
 import cv2
 import matplotlib.pyplot as plt
+import math
 
 
 class Lane3D():
@@ -28,8 +29,11 @@ class Lane3D():
         if not (len(data) < 5 or pca.explained_variance_ratio_[0] > 0.999):
             data = self.RANSAC_Linear_Interpolation(data)
             # data = self.RANSAC_Quadratic_Interpolation(data)
-        s3dd = sort_3d_data.Sort3DData(data, step_size=5, tolerance=10)
+        # plt.plot(np.transpose(data)[0], np.transpose(data)[1], "ro")
+
+        s3dd = sort_3d_data.Sort3DData(data, step_size=(self.span(data) / 10.0), tolerance=max(len(data)/50, 3))
         data = s3dd.getsorted()
+        plt.plot(np.transpose(data)[0], np.transpose(data)[1], "ro")
         pca = PCA(n_components=1)
         newdata = pca.fit_transform(data)
         if len(data) < 5 or pca.explained_variance_ratio_[0] > 0.999:
@@ -49,6 +53,16 @@ class Lane3D():
         model = b_spline_model_3d.BSplineModel3D(data, ctrl)
         curve = model.l_bfgs_fitting(displayed_points=displayed_points)
         return curve
+
+    def span(self, arr3d):
+        arr3d = np.array(arr3d)
+        temp = np.transpose(arr3d)
+        xs, ys, zs = temp[0], temp[1], temp[2]
+        dx = np.max(xs) - np.min(xs)
+        dy = np.max(ys) - np.min(ys)
+        dz = np.max(zs) - np.min(zs)
+        return math.sqrt(dx ** 2 + dy ** 2 + dz ** 2)
+
 
     def RANSAC_Quadratic_Interpolation(self, data, niter=100, threshold=10):
         trans = np.transpose(data)
@@ -237,42 +251,58 @@ def write_off(verts, file_path):
 if __name__ == '__main__':
     start = timer()
 
+
     # data_path = "/home/yuanning/DeepMotion/pointclouds"
     # files = sorted(os.listdir(data_path))
     # n = len(files)
     #
-    # for i in range(0, 20):
+    # for i in range(n):
     #     lane_mask = read_off(os.path.join(data_path, files[i]))  # 657 files
     #
-    #     print(lane_mask)
-    #     print(lane_mask.shape)
+    #     # print(lane_mask)
+    #     # print(lane_mask.shape)
     #
     #     lane3d = Lane3D()
     #     curve = lane3d.fit(lane_mask, displayed_points=1000)
     #
-    #     print(curve)
-    #     print(curve.shape)
+    #     # print(curve)
+    #     # print(curve.shape)
     #
-    #     # curve_path = "/home/yuanning/DeepMotion/curves/curve_{}".format(files[i])
-    #     # write_off(curve, curve_path)
+    #     curve_path = "/home/yuanning/DeepMotion/curves/curve_{}".format(files[i])
+    #     write_off(curve, curve_path)
+    #     print(files[i])
     #
-    #     plt.plot(np.transpose(lane_mask)[0], np.transpose(lane_mask)[1], "b,")
-    #     plt.plot(np.transpose(curve)[0], np.transpose(curve)[1], 'r')
-    #     plt.show()
+    #     # plt.plot(np.transpose(lane_mask)[0], np.transpose(lane_mask)[1], "b,")
+    #     # plt.plot(np.transpose(curve)[0], np.transpose(curve)[1], 'r')
+    #     # plt.show()
 
-    print(os.environ['PATH'])
 
-    meshlabserver_path = '/snap/meshlab/4/bin'
-    os.environ['PATH'] = meshlabserver_path + os.pathsep + os.environ['PATH']
-    # os.environ['PATH'] = '/snap/meshlab/current/lib' + os.pathsep + os.environ['PATH']
+    # lane_mask = read_off(os.path.join(data_path, "05_00000016.off"))
+    # lane3d = Lane3D()
+    # curve = lane3d.fit(lane_mask, displayed_points=1000)
+    #
+    # plt.plot(np.transpose(lane_mask)[0], np.transpose(lane_mask)[1], "b,")
+    # plt.plot(np.transpose(curve)[0], np.transpose(curve)[1], 'r')
+    # plt.show()
+
+    # print(os.environ['PATH'])
+    #
+    # meshlabserver_path = '/snap/meshlab/4/bin'
+    # os.environ['PATH'] = meshlabserver_path + os.pathsep + os.environ['PATH']
+    # os.environ['PATH'] = '/snap/meshlab/4/lib' + os.pathsep + os.environ['PATH']
     # orange_cube = mlx.FilterScript(file_out='orange_cube.ply', ml_version='2016.12')
     # mlx.create.cube(orange_cube, size=[3.0, 4.0, 5.0], center=True, color='orange')
     # mlx.transform.rotate(orange_cube, axis='x', angle=45)
     # mlx.transform.rotate(orange_cube, axis='y', angle=45)
     # mlx.transform.translate(orange_cube, value=[0, 5.0, 0])
     # orange_cube.run_script()
+    #
+    # aabb, geometry, topology = mlx.files.measure_all('bunny')
 
-    aabb, geometry, topology = mlx.files.measure_all('bunny', ml_version='2016.12')
+    # test = mlx.FilterScript(file_in="/home/yuanning/DeepMotion/pointclouds/05_00000016.off")
+    # test.run_script()
+
+    aabb, geometry, topology = mlx.files.measure_all("/home/yuanning/DeepMotion/pointclouds/00_00000000.off")
 
     end = timer()
     print("Total time used: {}".format(end - start))
