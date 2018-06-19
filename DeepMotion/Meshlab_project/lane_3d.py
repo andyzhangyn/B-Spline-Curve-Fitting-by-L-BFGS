@@ -33,7 +33,7 @@ class Lane3D():
 
         s3dd = sort_3d_data.Sort3DData(data, step_size=(self.span(data) / 10.0), tolerance=max(len(data)/50, 3))
         data = s3dd.getsorted()
-        plt.plot(np.transpose(data)[0], np.transpose(data)[1], "ro")
+        # plt.plot(np.transpose(data)[0], np.transpose(data)[1], "ro")
         pca = PCA(n_components=1)
         newdata = pca.fit_transform(data)
         if len(data) < 5 or pca.explained_variance_ratio_[0] > 0.999:
@@ -238,6 +238,7 @@ def read_off(file_path):
     f.close()
     return verts
 
+
 def write_off(verts, file_path):
     n_verts = len(verts)
     f = open(file_path, 'w')
@@ -248,9 +249,22 @@ def write_off(verts, file_path):
     f.close()
 
 
+def set_color(in_file_path, r, g, b, a, out_file_path):
+    fin = open(in_file_path, 'r')
+    fout = open(out_file_path, 'w')
+    fin.readline()
+    fout.write("OFF\n")
+    n_verts, n_faces, n_edges = tuple([int(s) for s in fin.readline().strip().split(' ')])
+    fout.write("{} 0 0\n".format(n_verts))
+    for i_vert in range(n_verts):
+        v = np.array([float(s) for s in fin.readline().strip().split(' ')])[0:3]
+        v = np.append(v, [r, g, b, a])
+        fout.write("{} {} {} {} {} {} {}\n".format(v[0], v[1], v[2], v[3], v[4], v[5], v[6]))
+    fin.close()
+    fout.close()
+
 if __name__ == '__main__':
     start = timer()
-
 
     data_path = "/home/yuanning/DeepMotion/pointclouds"
     files = sorted(os.listdir(data_path))
@@ -268,14 +282,19 @@ if __name__ == '__main__':
         # print(curve)
         # print(curve.shape)
 
-        curve_path = "/home/yuanning/DeepMotion/curves/curve_{}".format(files[i])
-        write_off(curve, curve_path)
+        # curve_path = "/home/yuanning/DeepMotion/curves/curve_{}".format(files[i])
+        # write_off(curve, curve_path)
+
+        # colorized_curve_path = "/home/yuanning/DeepMotion/colorized_curves/colorized_curve_{}".format(files[i])
+        # set_color(curve_path, 1.0, 0.0, 0.0, 0.75, colorized_curve_path)
         print(files[i])
 
-        # plt.plot(np.transpose(lane_mask)[0], np.transpose(lane_mask)[1], "b,")
-        # plt.plot(np.transpose(curve)[0], np.transpose(curve)[1], 'r')
+        plt.plot(np.transpose(lane_mask)[0], np.transpose(lane_mask)[1], "b,")
+        plt.plot(np.transpose(curve)[0], np.transpose(curve)[1], 'r')
         # plt.show()
-
+        if i % 10 == 9:
+            plt.show()
+    plt.show()
 
     # lane_mask = read_off(os.path.join(data_path, "05_00000016.off"))
     # lane3d = Lane3D()
