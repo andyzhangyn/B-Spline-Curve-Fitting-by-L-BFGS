@@ -29,11 +29,11 @@ class Lane3D():
         if not (len(data) < 5 or pca.explained_variance_ratio_[0] > 0.999):
             data = self.RANSAC_Linear_Interpolation(data)
             # data = self.RANSAC_Quadratic_Interpolation(data)
-        # plt.plot(np.transpose(data)[0], np.transpose(data)[1], "ro")
+        plt.plot(np.transpose(data)[0], np.transpose(data)[1], "b^")
 
         s3dd = sort_3d_data.Sort3DData(data, step_size=(self.span(data) / 10.0), tolerance=max(len(data)/50, 3))
         data = s3dd.getsorted()
-        # plt.plot(np.transpose(data)[0], np.transpose(data)[1], "ro")
+        plt.plot(np.transpose(data)[0], np.transpose(data)[1], "ro")
         pca = PCA(n_components=1)
         newdata = pca.fit_transform(data)
         if len(data) < 5 or pca.explained_variance_ratio_[0] > 0.999:
@@ -198,7 +198,7 @@ class Lane3D():
             M = 15
             for j in range(len(dataxs)):
                 p3 = np.array([dataxs[j], datays[j], datazs[j]])
-                A = np.linspace(-1, 3, 4 * M + 1)
+                A = np.linspace(-2, 4, 6 * M + 1)
                 B = np.transpose(np.array([polyx(A), polyy(A), polyz(A)]))
                 min_point2curve = min(min(distance.cdist([p3], B)))
                 if min_point2curve <= threshold:
@@ -270,7 +270,7 @@ if __name__ == '__main__':
     files = sorted(os.listdir(data_path))
     n = len(files)
 
-    for i in range(n):
+    for i in range(100, 120):
         lane_mask = read_off(os.path.join(data_path, files[i]))  # 657 files
 
         # print(lane_mask)
@@ -291,10 +291,10 @@ if __name__ == '__main__':
 
         plt.plot(np.transpose(lane_mask)[0], np.transpose(lane_mask)[1], "b,")
         plt.plot(np.transpose(curve)[0], np.transpose(curve)[1], 'r')
-        # plt.show()
-        if i % 10 == 9:
-            plt.show()
-    plt.show()
+        plt.show()
+        # if i % 20 == 19:
+        #     plt.show()
+    # plt.show()
 
     # lane_mask = read_off(os.path.join(data_path, "05_00000016.off"))
     # lane3d = Lane3D()

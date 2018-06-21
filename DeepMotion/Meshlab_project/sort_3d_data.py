@@ -37,12 +37,12 @@ class Sort3DData(object):
         p = initpoint
         d = initdirection1
         oldp = p
-        while p is not None:
+        while d is not None:
             p, d = self.searchnext(p, d)
             if p is None or (oldp[0] == p[0] and oldp[1] == p[1] and oldp[2] == p[2]):
                 break
             oldp = p
-            if p is not None:
+            if d is not None:
                 arr1 = np.zeros(1)
                 arr2 = np.zeros(1)
                 arr3 = np.zeros(1)
@@ -57,21 +57,42 @@ class Sort3DData(object):
                     self.sortedxs = np.concatenate((arr1, self.sortedxs))
                     self.sortedys = np.concatenate((arr2, self.sortedys))
                     self.sortedzs = np.concatenate((arr3, self.sortedzs))
+
+        arr1 = np.zeros(1)
+        arr2 = np.zeros(1)
+        arr3 = np.zeros(1)
+        arr1[0] = p[0]
+        arr2[0] = p[1]
+        arr3[0] = p[2]
+        if len(self.sortedxs) == 0:
+            self.sortedxs = arr1
+            self.sortedys = arr2
+            self.sortedzs = arr3
+        else:
+            self.sortedxs = np.concatenate((arr1, self.sortedxs))
+            self.sortedys = np.concatenate((arr2, self.sortedys))
+            self.sortedzs = np.concatenate((arr3, self.sortedzs))
+
         self.sortedxs = np.append(self.sortedxs, initpoint[0])
         self.sortedys = np.append(self.sortedys, initpoint[1])
         self.sortedzs = np.append(self.sortedzs, initpoint[2])
         p = initpoint
         d = initdirection2
         oldp = p
-        while p is not None:
+        while d is not None:
             p, d = self.searchnext(p, d)
-            if p is None or (oldp[0] == p[0] and oldp[1] == p[1] and oldp[2] == p[2]):
+            if d is None or (oldp[0] == p[0] and oldp[1] == p[1] and oldp[2] == p[2]):
                 break
             oldp = p
-            if p is not None:
+            if d is not None:
                 self.sortedxs = np.append(self.sortedxs, p[0])
                 self.sortedys = np.append(self.sortedys, p[1])
                 self.sortedzs = np.append(self.sortedzs, p[2])
+
+        self.sortedxs = np.append(self.sortedxs, p[0])
+        self.sortedys = np.append(self.sortedys, p[1])
+        self.sortedzs = np.append(self.sortedzs, p[2])
+
         self.sorted = np.transpose(np.array([self.sortedxs, self.sortedys, self.sortedzs]))
 
 
@@ -80,12 +101,14 @@ class Sort3DData(object):
         while True:
             i = i * 1.1
             neighbors = self.kdtree.query_ball_point(p + direction * i * 1.5, i)
-            if len(neighbors) == 0:
-                return None, None
+            # if len(neighbors) == 0:
+            #     return None, None
             if len(neighbors) >= self.tolerance or i > self.step_size * 50:
                 break
         if len(neighbors) < self.tolerance:
-            return None, None
+            dists, ps = self.kdtree.query([p + direction * i * 1.2])
+            newp = self.unsorted[ps[0]]
+            return newp, None
         dists, ps = self.kdtree.query([p + direction * i * 1.2])
         newp = self.unsorted[ps[0]]
         pca = PCA(n_components=1)
