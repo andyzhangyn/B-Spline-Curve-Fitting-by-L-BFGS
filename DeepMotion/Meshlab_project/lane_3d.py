@@ -27,8 +27,9 @@ class Lane3D():
         pca = PCA(n_components=1)
         pca.fit(data)
         if not (len(data) < 5 or pca.explained_variance_ratio_[0] > 0.999):
-            # data = self.RANSAC_Linear_Interpolation(data, threshold=int(math.sqrt(self.span(data))/2.0))
-            data = self.RANSAC_Linear_Interpolation(data)
+            # print(self.span(data)/8.333)
+            data = self.RANSAC_Linear_Interpolation(data, threshold=self.span(data)/25.0)
+            # data = self.RANSAC_Linear_Interpolation(data)
             # data = self.RANSAC_Quadratic_Interpolation(data, threshold=int(self.span(data)) / 15)
         plt.plot(np.transpose(data)[0], np.transpose(data)[1], "b^")
 
@@ -65,7 +66,7 @@ class Lane3D():
         return math.sqrt(dx ** 2 + dy ** 2 + dz ** 2)
 
 
-    def RANSAC_Quadratic_Interpolation(self, data, niter=100, threshold=10):
+    def RANSAC_Quadratic_Interpolation(self, data, niter=100, threshold=10.0):
         trans = np.transpose(data)
         dataxs, datays, datazs = trans[0], trans[1], trans[2]
         if len(dataxs) < 4:
@@ -115,7 +116,7 @@ class Lane3D():
             polyy = sp.interpolate.lagrange(range(3), [datays[rand1], datays[rand2], datays[rand3]])
             polyz = sp.interpolate.lagrange(range(3), [datazs[rand1], datazs[rand2], datazs[rand3]])
             gain = 0
-            M = 15
+            M = 10
             for j in range(len(dataxs)):
                 p3 = np.array([dataxs[j], datays[j], datazs[j]])
                 A = np.linspace(-1, 3, 4 * M + 1)
@@ -146,7 +147,8 @@ class Lane3D():
             num = num + 1
         return np.transpose(np.array([best_dataxs, best_datays, best_datazs]))
 
-    def RANSAC_Linear_Interpolation(self, data, niter=100, threshold=10):
+    def RANSAC_Linear_Interpolation(self, data, niter=30, threshold=10.0):
+        # print("ransac")
         trans = np.transpose(data)
         dataxs, datays, datazs = trans[0], trans[1], trans[2]
         if len(dataxs) < 3:
@@ -154,6 +156,7 @@ class Lane3D():
         np.random.seed(0)
         max_gain = 0
         n = len(dataxs)
+        # print(n)
         best_dataxs = None
         best_datays = None
         best_datazs = None
@@ -162,6 +165,7 @@ class Lane3D():
         best_polyz = None
         num = 0
         for i in range(niter):
+            # print(i)
             newdataxs = []
             newdatays = []
             newdatazs = []
@@ -199,7 +203,8 @@ class Lane3D():
             M = 15
             for j in range(len(dataxs)):
                 p3 = np.array([dataxs[j], datays[j], datazs[j]])
-                A = np.linspace(-3, 5, 8 * M + 1)
+                A = np.linspace(-0.5, 1.5, 2 * M + 1)
+                # plt.plot(polyx(A), polyy(A), 'k')
                 B = np.transpose(np.array([polyx(A), polyy(A), polyz(A)]))
                 min_point2curve = min(min(distance.cdist([p3], B)))
                 if min_point2curve <= threshold:
@@ -210,10 +215,12 @@ class Lane3D():
             newdataxs = np.array(newdataxs)
             newdatays = np.array(newdatays)
             newdatazs = np.array(newdatazs)
-            if len(newdataxs) >= 5 * n / 6 or num >= 30:
-                return np.transpose(np.array([newdataxs, newdatays, newdatazs]))
+            # if len(newdataxs) >= 5 * n / 6 or num >= 30:
+            # if num >= 30:
+            #     print("Num", num)
+            #     return np.transpose(np.array([newdataxs, newdatays, newdatazs]))
             if gain > max_gain:
-                if gain - max_gain > 30:
+                if gain - max_gain > n / 50:
                     num = 0
                 max_gain = gain
                 best_dataxs = newdataxs
@@ -225,6 +232,8 @@ class Lane3D():
             if gain == n:
                 break
             num = num + 1
+        # A = np.linspace(-0.5, 1.5, 10)
+        # plt.plot(best_polyx(A), best_polyy(A), 'k')
         return np.transpose(np.array([best_dataxs, best_datays, best_datazs]))
 
 
@@ -271,7 +280,7 @@ if __name__ == '__main__':
     files = sorted(os.listdir(data_path))
     n = len(files)
 
-    for i in range(n):
+    for i in range(100, 110):
         lane_mask = read_off(os.path.join(data_path, files[i]))  # 657 files
 
         # print(lane_mask)
@@ -283,17 +292,17 @@ if __name__ == '__main__':
         # print(curve)
         # print(curve.shape)
 
-        curve_path = "/home/yuanning/DeepMotion/curves/curve_{}".format(files[i])
-        write_off(curve, curve_path)
+        # curve_path = "/home/yuanning/DeepMotion/curves/curve_{}".format(files[i])
+        # write_off(curve, curve_path)
 
-        colorized_curve_path = "/home/yuanning/DeepMotion/colorized_curves/colorized_curve_{}".format(files[i])
-        set_color(curve_path, 1.0, 0.0, 0.0, 0.75, colorized_curve_path)
+        # colorized_curve_path = "/home/yuanning/DeepMotion/colorized_curves/colorized_curve_{}".format(files[i])
+        # set_color(curve_path, 1.0, 0.0, 0.0, 0.75, colorized_curve_path)
         print(files[i])
 
-        # plt.plot(np.transpose(lane_mask)[0], np.transpose(lane_mask)[1], "b,")
-        # plt.plot(np.transpose(curve)[0], np.transpose(curve)[1], 'r')
-        # plt.show()
-        # if i % 20 == 19:
+        plt.plot(np.transpose(lane_mask)[0], np.transpose(lane_mask)[1], "b,")
+        plt.plot(np.transpose(curve)[0], np.transpose(curve)[1], 'r')
+        plt.show()
+        # if i % 10 == 9:
         #     plt.show()
     # plt.show()
 
