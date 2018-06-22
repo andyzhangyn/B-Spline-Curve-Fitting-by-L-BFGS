@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/DeepMotion.dir/SplineDrawer-master/spline_to_bezier.m.o  -o DeepMotion 

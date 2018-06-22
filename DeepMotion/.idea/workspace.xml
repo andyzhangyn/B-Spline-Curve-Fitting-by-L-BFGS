@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
+    <generated>
+      <config projectName="DeepMotion" targetName="DeepMotion" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="cc726985-02a6-41ca-83aa-d9acb656b45a" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,18 +27,15 @@
     <SUITE FILE_PATH="coverage/DeepMotion$quadtree.coverage" NAME="quadtree Coverage Results" MODIFIED="1527828352472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
     <SUITE FILE_PATH="coverage/DeepMotion$b_spline.coverage" NAME="b_spline Coverage Results" MODIFIED="1527124352934" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
     <SUITE FILE_PATH="coverage/DeepMotion$b_spline_model_3d.coverage" NAME="b_spline_model_3d Coverage Results" MODIFIED="1528276964304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Meshlab_project" />
-    <SUITE FILE_PATH="coverage/DeepMotion$lane_3d.coverage" NAME="lane_3d Coverage Results" MODIFIED="1529571761898" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Meshlab_project" />
+    <SUITE FILE_PATH="coverage/DeepMotion$lane_3d.coverage" NAME="lane_3d Coverage Results" MODIFIED="1529638146864" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Meshlab_project" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="lane_3d.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Meshlab_project/lane_3d.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="289" column="23" lean-forward="true" selection-start-line="289" selection-start-column="23" selection-end-line="289" selection-end-column="23" />
-              <folding>
-                <element signature="e#143#152#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="210">
+              <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -36,7 +43,7 @@
       <file leaf-file-name="sort_3d_data.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Meshlab_project/sort_3d_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
+            <state relative-caret-position="1530">
               <caret line="106" column="21" selection-start-line="106" selection-start-column="21" selection-end-line="106" selection-end-column="21" />
               <folding>
                 <element signature="e#143#161#0" expanded="true" />
@@ -147,6 +154,8 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.lane_3d">
+    <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all" />
+    <configuration name="DeepMotion" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="DeepMotion" TARGET_NAME="DeepMotion" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="DeepMotion" RUN_TARGET_NAME="DeepMotion" />
     <configuration name="b_spline_model_3d" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="DeepMotion" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -243,6 +252,8 @@
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <list>
+      <item itemvalue="Application.Build All" />
+      <item itemvalue="Application.DeepMotion" />
       <item itemvalue="Python.lane_math" />
       <item itemvalue="Python.sort_data" />
       <item itemvalue="Python.lane_3d" />
@@ -269,8 +280,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1527062196765</updated>
+      <workItem from="1529638345414" duration="907000" />
+      <workItem from="1529648175088" duration="69000" />
     </task>
     <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="976000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -283,31 +299,31 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
-    <editor active="true" />
     <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13369273" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3291536" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3291536" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3291536" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13292885" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.32984003" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3291536" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3291536" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39916405" />
+      <window_info active="true" anchor="bottom" id="CMake" order="9" visible="true" weight="0.32959184" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="8" weight="0.3291536" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.32984003" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="Coverage" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -329,6 +345,20 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/colorized_curves/colorized_curve_05_00000000.off">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/colorized_curves/colorized_curve_05_00000000.off">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lane/b_spline_model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1395">
@@ -511,9 +541,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/scipy/optimize/lbfgsb.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/lane/cubic_b_spline.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="885">
@@ -617,20 +644,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
-          <folding>
-            <element signature="e#143#161#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Meshlab_project/tmpHwe2he.xyz" />
-    <entry file="file://$PROJECT_DIR$/pointclouds/00_00000000.off">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/colorized_curves/colorized_curve_00_00000000.off">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="3" selection-start-column="3" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Meshlab_project/sort_3d_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1530">
+          <caret line="106" column="21" selection-start-line="106" selection-start-column="21" selection-end-line="106" selection-end-column="21" />
+          <folding>
+            <element signature="e#143#161#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -641,23 +672,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Meshlab_project/sort_3d_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="106" column="21" selection-start-line="106" selection-start-column="21" selection-end-line="106" selection-end-column="21" />
-          <folding>
-            <element signature="e#143#161#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Meshlab_project/lane_3d.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="289" column="23" lean-forward="true" selection-start-line="289" selection-start-column="23" selection-end-line="289" selection-end-column="23" />
-          <folding>
-            <element signature="e#143#152#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="210">
+          <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
         </state>
       </provider>
     </entry>
