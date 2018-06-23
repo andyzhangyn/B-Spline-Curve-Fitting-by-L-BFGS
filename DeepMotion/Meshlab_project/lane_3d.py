@@ -28,17 +28,17 @@ class Lane3D():
         pca.fit(data)
         if not (len(data) < 5 or pca.explained_variance_ratio_[0] > 0.999):
             # print(self.span(data)/8.333)
-            data = self.RANSAC_Linear_Interpolation(data, threshold=self.span(data)/25.0)
+            # data = self.RANSAC_Linear_Interpolation(data, threshold=self.span(data)/25.0)
             # data = self.RANSAC_Linear_Interpolation(data)
-            # data = self.RANSAC_Quadratic_Interpolation(data, threshold=int(self.span(data)) / 15)
+            data = self.RANSAC_Quadratic_Interpolation(data, threshold=self.span(data)/35.0)
         plt.plot(np.transpose(data)[0], np.transpose(data)[1], "b^")
 
-        s3dd = sort_3d_data.Sort3DData(data, step_size=(self.span(data) / 10.0), tolerance=max(len(data)/50, 3))
+        s3dd = sort_3d_data.Sort3DData(data, step_size=(self.span(data) / 5.0), tolerance=max(len(data)/50, 3))
         data = s3dd.getsorted()
         plt.plot(np.transpose(data)[0], np.transpose(data)[1], "ro")
         pca = PCA(n_components=1)
         newdata = pca.fit_transform(data)
-        if len(data) < 5 or pca.explained_variance_ratio_[0] > 0.999:
+        if len(data) < 5 or pca.explained_variance_ratio_[0] > 0.9995:
             newdata = pca.inverse_transform(newdata)
             ts = np.linspace(0, 1, displayed_points).reshape(displayed_points, 1)
             curve = np.dot(ts, [newdata[0]]) + np.dot(1 - ts,  [newdata[-1]])
@@ -85,19 +85,19 @@ class Lane3D():
             newdataxs = []
             newdatays = []
             newdatazs = []
-            K = 6
-            if n >= K:
-                rand1 = np.random.randint(0, n / K)
-                rand2 = np.random.randint(n / K, (K - 1) * n / K)
-                rand3 = np.random.randint((K - 1) * n / K, n)
-            else:
-                rand1 = 0
-                rand2 = n / 2 - 1
-                rand3 = n - 1
+            # K = 6
+            # if n >= K:
+            #     rand1 = np.random.randint(0, n / K)
+            #     rand2 = np.random.randint(n / K, (K - 1) * n / K)
+            #     rand3 = np.random.randint((K - 1) * n / K, n)
+            # else:
+            #     rand1 = 0
+            #     rand2 = n / 2 - 1
+            #     rand3 = n - 1
 
-            # rand1 = np.random.randint(n)
-            # rand2 = np.random.randint(n)
-            # rand3 = np.random.randint(n)
+            rand1 = np.random.randint(n)
+            rand2 = np.random.randint(n)
+            rand3 = np.random.randint(n)
             while True:
                 if rand1 == rand2:
                     rand2 = np.random.randint(n)
@@ -116,7 +116,7 @@ class Lane3D():
             polyy = sp.interpolate.lagrange(range(3), [datays[rand1], datays[rand2], datays[rand3]])
             polyz = sp.interpolate.lagrange(range(3), [datazs[rand1], datazs[rand2], datazs[rand3]])
             gain = 0
-            M = 10
+            M = 20
             for j in range(len(dataxs)):
                 p3 = np.array([dataxs[j], datays[j], datazs[j]])
                 A = np.linspace(-1, 3, 4 * M + 1)
@@ -130,10 +130,15 @@ class Lane3D():
             newdataxs = np.array(newdataxs)
             newdatays = np.array(newdatays)
             newdatazs = np.array(newdatazs)
-            if len(newdataxs) >= 5 * n / 6 or num >= 30:
+            if len(newdataxs) >= 5 * n / 6 or num >= 75:
+            # if num >= 75:
+            #     print(num)
+            #     A = np.linspace(-1, 3, 10)
+            #     plt.plot(best_polyx(A), best_polyy(A), 'k')
                 return np.transpose(np.array([newdataxs, newdatays, newdatazs]))
             if gain > max_gain:
-                if gain - max_gain > 30:
+                if gain - max_gain > 0:
+                    print(gain)
                     num = 0
                 max_gain = gain
                 best_dataxs = newdataxs
@@ -145,6 +150,8 @@ class Lane3D():
             if gain == n:
                 break
             num = num + 1
+        # A = np.linspace(-1, 3, 10)
+        # plt.plot(best_polyx(A), best_polyy(A), 'k')
         return np.transpose(np.array([best_dataxs, best_datays, best_datazs]))
 
     def RANSAC_Linear_Interpolation(self, data, niter=30, threshold=10.0):
@@ -263,7 +270,7 @@ def set_color(in_file_path, r, g, b, a, out_file_path):
     fin = open(in_file_path, 'r')
     fout = open(out_file_path, 'w')
     fin.readline()
-    fout.write("OFF\n")
+    fout.write("COFF\n")
     n_verts, n_faces, n_edges = tuple([int(s) for s in fin.readline().strip().split(' ')])
     fout.write("{} 0 0\n".format(n_verts))
     for i_vert in range(n_verts):
@@ -280,7 +287,7 @@ if __name__ == '__main__':
     files = sorted(os.listdir(data_path))
     n = len(files)
 
-    for i in range(100, 110):
+    for i in range(90, 100):
         lane_mask = read_off(os.path.join(data_path, files[i]))  # 657 files
 
         # print(lane_mask)
@@ -302,11 +309,12 @@ if __name__ == '__main__':
         plt.plot(np.transpose(lane_mask)[0], np.transpose(lane_mask)[1], "b,")
         plt.plot(np.transpose(curve)[0], np.transpose(curve)[1], 'r')
         plt.show()
+
         # if i % 10 == 9:
         #     plt.show()
     # plt.show()
 
-    # lane_mask = read_off(os.path.join(data_path, "05_00000016.off"))
+    # lane_mask = read_off(os.path.join(data_path, "05_00000008.off"))  # 05_00000008.off,05_00000020.off,05_00000022.off
     # lane3d = Lane3D()
     # curve = lane3d.fit(lane_mask, displayed_points=1000)
     #
