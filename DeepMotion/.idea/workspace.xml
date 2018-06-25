@@ -20,14 +20,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/DeepMotion$sort_3d_data.coverage" NAME="sort_3d_data Coverage Results" MODIFIED="1528429806730" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Meshlab_project" />
+    <SUITE FILE_PATH="coverage/DeepMotion$sort_3d_data.coverage" NAME="sort_3d_data Coverage Results" MODIFIED="1529914878765" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Meshlab_project" />
     <SUITE FILE_PATH="coverage/DeepMotion$sort_data.coverage" NAME="sort_data Coverage Results" MODIFIED="1528164539631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
     <SUITE FILE_PATH="coverage/DeepMotion$show_data.coverage" NAME="show_data Coverage Results" MODIFIED="1527835186717" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
     <SUITE FILE_PATH="coverage/DeepMotion$lane_math.coverage" NAME="lane_math Coverage Results" MODIFIED="1528268848599" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
     <SUITE FILE_PATH="coverage/DeepMotion$quadtree.coverage" NAME="quadtree Coverage Results" MODIFIED="1527828352472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
     <SUITE FILE_PATH="coverage/DeepMotion$b_spline.coverage" NAME="b_spline Coverage Results" MODIFIED="1527124352934" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
     <SUITE FILE_PATH="coverage/DeepMotion$b_spline_model_3d.coverage" NAME="b_spline_model_3d Coverage Results" MODIFIED="1528276964304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Meshlab_project" />
-    <SUITE FILE_PATH="coverage/DeepMotion$lane_3d.coverage" NAME="lane_3d Coverage Results" MODIFIED="1529740482044" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Meshlab_project" />
+    <SUITE FILE_PATH="coverage/DeepMotion$lane_3d.coverage" NAME="lane_3d Coverage Results" MODIFIED="1529920573398" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Meshlab_project" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -35,15 +35,10 @@
         <entry file="file://$PROJECT_DIR$/Meshlab_project/lane_3d.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="375">
-              <caret line="294" lean-forward="true" selection-start-line="294" selection-end-line="294" />
+              <caret line="40" column="80" lean-forward="true" selection-start-line="40" selection-start-column="80" selection-end-line="40" selection-end-column="80" />
               <folding>
                 <element signature="n#!!doc" />
                 <element signature="e#482#486#0" />
-                <element signature="e#2204#2474#0" />
-                <element signature="e#5778#9177#0" />
-                <element signature="e#9209#9563#0" />
-                <element signature="e#9603#9802#0" />
-                <element signature="e#9865#10388#0" />
               </folding>
             </state>
           </provider>
@@ -52,8 +47,8 @@
       <file leaf-file-name="sort_3d_data.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Meshlab_project/sort_3d_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="112" column="34" selection-start-line="112" selection-start-column="34" selection-end-line="112" selection-end-column="34" />
+            <state relative-caret-position="330">
+              <caret line="31" column="73" selection-start-line="31" selection-start-column="73" selection-end-line="31" selection-end-column="73" />
               <folding>
                 <element signature="e#143#161#0" expanded="true" />
               </folding>
@@ -291,11 +286,14 @@
       <workItem from="1529638345414" duration="907000" />
       <workItem from="1529648175088" duration="69000" />
       <workItem from="1529649507640" duration="887000" />
+      <workItem from="1529899668879" duration="600000" />
+      <workItem from="1529907475287" duration="415000" />
+      <workItem from="1529916810435" duration="5000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1863000" />
+    <option name="totallyTimeSpent" value="2883000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -317,7 +315,7 @@
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3291536" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3291536" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13513513" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13734142" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.32984003" />
@@ -659,13 +657,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/c_meshlab_project/lane_3d.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/c_meshlab_project/lane_3d.cpp" />
     <entry file="file://$PROJECT_DIR$/colorized_curves/colorized_curve_05_00000000.off">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -675,8 +667,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Meshlab_project/sort_3d_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="112" column="34" selection-start-line="112" selection-start-column="34" selection-end-line="112" selection-end-column="34" />
+        <state relative-caret-position="330">
+          <caret line="31" column="73" selection-start-line="31" selection-start-column="73" selection-end-line="31" selection-end-column="73" />
           <folding>
             <element signature="e#143#161#0" expanded="true" />
           </folding>
@@ -686,15 +678,10 @@
     <entry file="file://$PROJECT_DIR$/Meshlab_project/lane_3d.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
-          <caret line="294" lean-forward="true" selection-start-line="294" selection-end-line="294" />
+          <caret line="40" column="80" lean-forward="true" selection-start-line="40" selection-start-column="80" selection-end-line="40" selection-end-column="80" />
           <folding>
             <element signature="n#!!doc" />
             <element signature="e#482#486#0" />
-            <element signature="e#2204#2474#0" />
-            <element signature="e#5778#9177#0" />
-            <element signature="e#9209#9563#0" />
-            <element signature="e#9603#9802#0" />
-            <element signature="e#9865#10388#0" />
           </folding>
         </state>
       </provider>

@@ -24,16 +24,22 @@ class Lane3D():
         pass
 
     def fit(self, data, displayed_points=100):
+        # print(data)
+        if len(data) > 100:
+            np.random.seed(0)
+            data = np.random.permutation(data)[:100]
+        # print(data)
         pca = PCA(n_components=1)
         pca.fit(data)
         if not (len(data) < 5 or pca.explained_variance_ratio_[0] > 0.999):
             # print(self.span(data)/8.333)
             # data = self.RANSAC_Linear_Interpolation(data, threshold=self.span(data)/25.0)
             # data = self.RANSAC_Linear_Interpolation(data)
-            data = self.RANSAC_Quadratic_Interpolation(data, threshold=self.span(data)/35.0)
+            data = self.RANSAC_Quadratic_Interpolation(data, threshold=self.span(data)/25.0)
         plt.plot(np.transpose(data)[0], np.transpose(data)[1], "b^")
 
-        s3dd = sort_3d_data.Sort3DData(data, step_size=(self.span(data) / 5.0), tolerance=max(len(data)/50, 3))
+        s3dd = sort_3d_data.Sort3DData(data, step_size=(self.span(data) / 10.0),
+                                       tolerance=max(len(data)/50, 3), growfactor=1.5)
         data = s3dd.getsorted()
         plt.plot(np.transpose(data)[0], np.transpose(data)[1], "ro")
         pca = PCA(n_components=1)
@@ -116,7 +122,7 @@ class Lane3D():
             polyy = sp.interpolate.lagrange(range(3), [datays[rand1], datays[rand2], datays[rand3]])
             polyz = sp.interpolate.lagrange(range(3), [datazs[rand1], datazs[rand2], datazs[rand3]])
             gain = 0
-            M = 20
+            M = 10
             for j in range(len(dataxs)):
                 p3 = np.array([dataxs[j], datays[j], datazs[j]])
                 A = np.linspace(-1, 3, 4 * M + 1)
@@ -130,15 +136,10 @@ class Lane3D():
             newdataxs = np.array(newdataxs)
             newdatays = np.array(newdatays)
             newdatazs = np.array(newdatazs)
-            if len(newdataxs) >= 5 * n / 6 or num >= 75:
-            # if num >= 75:
-            #     print(num)
-            #     A = np.linspace(-1, 3, 10)
-            #     plt.plot(best_polyx(A), best_polyy(A), 'k')
-                return np.transpose(np.array([newdataxs, newdatays, newdatazs]))
+            # if len(newdataxs) >= 5 * n / 6 or num >= 75:
             if gain > max_gain:
                 if gain - max_gain > 0:
-                    print(gain)
+                    # print(gain)
                     num = 0
                 max_gain = gain
                 best_dataxs = newdataxs
@@ -150,8 +151,14 @@ class Lane3D():
             if gain == n:
                 break
             num = num + 1
-        # A = np.linspace(-1, 3, 10)
-        # plt.plot(best_polyx(A), best_polyy(A), 'k')
+            if num >= 75:
+                # print(num)
+                # A = np.linspace(-1, 3, 41)
+                # plt.plot(best_polyx(A), best_polyy(A), 'k.-')
+                return np.transpose(np.array([best_dataxs, best_datays, best_datazs]))
+        # A = np.linspace(-1, 3, 41)
+        # plt.plot(best_polyx(A), best_polyy(A), 'k.-')
+        # print(num)
         return np.transpose(np.array([best_dataxs, best_datays, best_datazs]))
 
     def RANSAC_Linear_Interpolation(self, data, niter=30, threshold=10.0):
@@ -241,6 +248,7 @@ class Lane3D():
             num = num + 1
         # A = np.linspace(-0.5, 1.5, 10)
         # plt.plot(best_polyx(A), best_polyy(A), 'k')
+        # print(num)
         return np.transpose(np.array([best_dataxs, best_datays, best_datazs]))
 
 
@@ -287,7 +295,7 @@ if __name__ == '__main__':
     files = sorted(os.listdir(data_path))
     n = len(files)
 
-    for i in range(90, 100):
+    for i in range(120, 150):
         lane_mask = read_off(os.path.join(data_path, files[i]))  # 657 files
 
         # print(lane_mask)
@@ -314,7 +322,7 @@ if __name__ == '__main__':
         #     plt.show()
     # plt.show()
 
-    # lane_mask = read_off(os.path.join(data_path, "05_00000008.off"))  # 05_00000008.off,05_00000020.off,05_00000022.off
+    # lane_mask = read_off(os.path.join(data_path, "00_00000139.off"))  # 05_00000008.off,05_00000020.off,05_00000022.off
     # lane3d = Lane3D()
     # curve = lane3d.fit(lane_mask, displayed_points=1000)
     #

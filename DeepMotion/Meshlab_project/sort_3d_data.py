@@ -13,7 +13,7 @@ from sklearn.decomposition import PCA
 
 class Sort3DData(object):
 
-    def __init__(self, points, step_size=30, tolerance=20):
+    def __init__(self, points, step_size=30, tolerance=20, growfactor=1.1):
         self.step_size = step_size
         np.random.seed(0)
         self.unsorted = np.array(points)
@@ -23,12 +23,13 @@ class Sort3DData(object):
         self.sortedzs = []
         self.kdtree = kdtree.KDTree(points)
         self.tolerance = tolerance
+        self.growfactor = growfactor
         initpoint = self.unsorted[self.n / 2]
         i = self.step_size
         while True:
-            i = i * 1.1
+            i = i * self.growfactor
             neighbors = self.kdtree.query_ball_point(initpoint, i)
-            if len(neighbors) >= self.tolerance or i > self.step_size * 5:
+            if len(neighbors) >= self.tolerance or i > self.step_size * 3:
                 break
         pca = PCA(n_components=1)
         pca.fit(self.unsorted[neighbors])
@@ -100,16 +101,16 @@ class Sort3DData(object):
         i = self.step_size
         while True:
             i = i * 1.1
-            neighbors = self.kdtree.query_ball_point(p + direction * i * 1.2, i)
+            neighbors = self.kdtree.query_ball_point(p + direction * i * self.growfactor, i)
             # if len(neighbors) == 0:
             #     return None, None
-            if len(neighbors) >= self.tolerance or i > self.step_size * 5:
+            if len(neighbors) >= self.tolerance or i > self.step_size * 3:
                 break
         if len(neighbors) < self.tolerance:
-            dists, ps = self.kdtree.query([p + direction * i * 1.2])
+            dists, ps = self.kdtree.query([p + direction * i * self.growfactor])
             newp = self.unsorted[ps[0]]
             return newp, None
-        dists, ps = self.kdtree.query([p + direction * i * 1.2])
+        dists, ps = self.kdtree.query([p + direction * i * self.growfactor])
         newp = self.unsorted[ps[0]]
         pca = PCA(n_components=1)
         pca.fit(self.unsorted[neighbors])
