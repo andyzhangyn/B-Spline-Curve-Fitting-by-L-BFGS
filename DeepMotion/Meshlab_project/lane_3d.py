@@ -25,9 +25,10 @@ class Lane3D():
 
     def fit(self, data, displayed_points=100):
         # print(data)
-        if len(data) > 100:
+        ceil = 100
+        if len(data) > ceil:
             np.random.seed(0)
-            data = np.random.permutation(data)[:100]
+            data = np.random.permutation(data)[:ceil]
         # print(data)
         pca = PCA(n_components=1)
         pca.fit(data)
@@ -35,13 +36,14 @@ class Lane3D():
             # print(self.span(data)/8.333)
             # data = self.RANSAC_Linear_Interpolation(data, threshold=self.span(data)/25.0)
             # data = self.RANSAC_Linear_Interpolation(data)
-            data = self.RANSAC_Quadratic_Interpolation(data, threshold=self.span(data)/25.0)
-        plt.plot(np.transpose(data)[0], np.transpose(data)[1], "b^")
+            # data = self.RANSAC_Quadratic_Interpolation(data, threshold=self.span(data)/25.0)
+            data = self.RANSAC_Mixed_Interpolation(data, threshold=self.span(data)/20.0)
+        # plt.plot(np.transpose(data)[0], np.transpose(data)[1], "b^")
 
         s3dd = sort_3d_data.Sort3DData(data, step_size=(self.span(data) / 10.0),
                                        tolerance=max(len(data)/50, 3), growfactor=1.5)
         data = s3dd.getsorted()
-        plt.plot(np.transpose(data)[0], np.transpose(data)[1], "ro")
+        # plt.plot(np.transpose(data)[0], np.transpose(data)[1], "ro")
         pca = PCA(n_components=1)
         newdata = pca.fit_transform(data)
         if len(data) < 5 or pca.explained_variance_ratio_[0] > 0.9995:
@@ -70,6 +72,121 @@ class Lane3D():
         dy = np.max(ys) - np.min(ys)
         dz = np.max(zs) - np.min(zs)
         return math.sqrt(dx ** 2 + dy ** 2 + dz ** 2)
+
+    def RANSAC_Mixed_Interpolation(self, data, niter=150, threshold=10.0):
+        trans = np.transpose(data)
+        dataxs, datays, datazs = trans[0], trans[1], trans[2]
+        if len(dataxs) < 4:
+            return data
+        np.random.seed(0)
+        max_gain = 0
+        n = len(dataxs)
+        best_dataxs = None
+        best_datays = None
+        best_datazs = None
+        best_polyx = None
+        best_polyy = None
+        best_polyz = None
+        num = 0
+        for i in range(niter):
+            newdataxs = []
+            newdatays = []
+            newdatazs = []
+            if np.random.randint(2) == 0:
+                rand1 = np.random.randint(n)
+                rand2 = np.random.randint(n)
+                while True:
+                    if rand1 == rand2:
+                        rand2 = np.random.randint(n)
+                    else:
+                        break
+                polyx = sp.interpolate.lagrange(range(2), [dataxs[rand1], dataxs[rand2]])
+                polyy = sp.interpolate.lagrange(range(2), [datays[rand1], datays[rand2]])
+                polyz = sp.interpolate.lagrange(range(2), [datazs[rand1], datazs[rand2]])
+                gain = 0
+                M = 15
+                for j in range(len(dataxs)):
+                    p3 = np.array([dataxs[j], datays[j], datazs[j]])
+                    A = np.linspace(-0.5, 1.5, 2 * M + 1)
+                    B = np.transpose(np.array([polyx(A), polyy(A), polyz(A)]))
+                    min_point2curve = min(min(distance.cdist([p3], B)))
+                    if min_point2curve <= threshold:
+                        newdataxs.append(p3[0])
+                        newdatays.append(p3[1])
+                        newdatazs.append(p3[2])
+                        gain = gain + 1
+                newdataxs = np.array(newdataxs)
+                newdatays = np.array(newdatays)
+                newdatazs = np.array(newdatazs)
+                if gain > max_gain:
+                    if gain - max_gain > n / 50:
+                        num = 0
+                    max_gain = gain
+                    best_dataxs = newdataxs
+                    best_datays = newdatays
+                    best_datazs = newdatazs
+                    best_polyx = polyx
+                    best_polyy = polyy
+                    best_polyz = polyz
+                if gain == n:
+                    break
+                num = num + 1
+            else:
+                rand1 = np.random.randint(n)
+                rand2 = np.random.randint(n)
+                rand3 = np.random.randint(n)
+                while True:
+                    if rand1 == rand2:
+                        rand2 = np.random.randint(n)
+                    else:
+                        break
+                while True:
+                    if rand3 == rand1 or rand3 == rand2:
+                        rand3 = np.random.randint(n)
+                    else:
+                        break
+                polyx = sp.interpolate.lagrange(range(3), [dataxs[rand1], dataxs[rand2], dataxs[rand3]])
+                polyy = sp.interpolate.lagrange(range(3), [datays[rand1], datays[rand2], datays[rand3]])
+                polyz = sp.interpolate.lagrange(range(3), [datazs[rand1], datazs[rand2], datazs[rand3]])
+                gain = 0
+                M = 10
+                for j in range(len(dataxs)):
+                    p3 = np.array([dataxs[j], datays[j], datazs[j]])
+                    A = np.linspace(-1, 3, 4 * M + 1)
+                    B = np.transpose(np.array([polyx(A), polyy(A), polyz(A)]))
+                    min_point2curve = min(min(distance.cdist([p3], B)))
+                    if min_point2curve <= threshold * 0.75:
+                        newdataxs.append(p3[0])
+                        newdatays.append(p3[1])
+                        newdatazs.append(p3[2])
+                        gain = gain + 1
+                newdataxs = np.array(newdataxs)
+                newdatays = np.array(newdatays)
+                newdatazs = np.array(newdatazs)
+                # if len(newdataxs) >= 5 * n / 6 or num >= 75:
+                if gain > max_gain:
+                    if gain - max_gain > 0:
+                        # print(gain)
+                        num = 0
+                    max_gain = gain
+                    best_dataxs = newdataxs
+                    best_datays = newdatays
+                    best_datazs = newdatazs
+                    best_polyx = polyx
+                    best_polyy = polyy
+                    best_polyz = polyz
+                if gain == n:
+                    break
+                num = num + 1
+                if num >= 75:
+                    # print(num)
+                    # A = np.linspace(-1, 3, 41)
+                    # plt.plot(best_polyx(A), best_polyy(A), 'k.-')
+                    return np.transpose(np.array([best_dataxs, best_datays, best_datazs]))
+        # A = np.linspace(-1, 3, 41)
+        # plt.plot(best_polyx(A), best_polyy(A), 'k.-')
+        return np.transpose(np.array([best_dataxs, best_datays, best_datazs]))
+
 
 
     def RANSAC_Quadratic_Interpolation(self, data, niter=100, threshold=10.0):
@@ -295,7 +412,7 @@ if __name__ == '__main__':
     files = sorted(os.listdir(data_path))
     n = len(files)
 
-    for i in range(120, 150):
+    for i in range(600, 657):
         lane_mask = read_off(os.path.join(data_path, files[i]))  # 657 files
 
         # print(lane_mask)
@@ -309,17 +426,16 @@ if __name__ == '__main__':
 
         # curve_path = "/home/yuanning/DeepMotion/curves/curve_{}".format(files[i])
         # write_off(curve, curve_path)
-
         # colorized_curve_path = "/home/yuanning/DeepMotion/colorized_curves/colorized_curve_{}".format(files[i])
         # set_color(curve_path, 1.0, 0.0, 0.0, 0.75, colorized_curve_path)
-        print(files[i])
-
         plt.plot(np.transpose(lane_mask)[0], np.transpose(lane_mask)[1], "b,")
         plt.plot(np.transpose(curve)[0], np.transpose(curve)[1], 'r')
-        plt.show()
+        # plt.show()
 
-        # if i % 10 == 9:
-        #     plt.show()
+        print(files[i])
+
+        if i % 10 == 9:
+            plt.show()
     # plt.show()
 
     # lane_mask = read_off(os.path.join(data_path, "00_00000139.off"))  # 05_00000008.off,05_00000020.off,05_00000022.off

@@ -1,5 +1,0 @@
-<!DOCTYPE FilterScript>
-<FilterScript>
-  <xmlfilter name="Compute Geometric Measures"/>
-  <xmlfilter name="Compute Topological Measures"/>
-</FilterScript>

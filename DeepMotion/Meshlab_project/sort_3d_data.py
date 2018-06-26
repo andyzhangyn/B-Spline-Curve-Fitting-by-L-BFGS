@@ -29,7 +29,7 @@ class Sort3DData(object):
         while True:
             i = i * self.growfactor
             neighbors = self.kdtree.query_ball_point(initpoint, i)
-            if len(neighbors) >= self.tolerance or i > self.step_size * 3:
+            if len(neighbors) >= self.tolerance or i > self.step_size * 2:
                 break
         pca = PCA(n_components=1)
         pca.fit(self.unsorted[neighbors])
@@ -100,17 +100,17 @@ class Sort3DData(object):
     def searchnext(self, p, direction):
         i = self.step_size
         while True:
-            i = i * 1.1
-            neighbors = self.kdtree.query_ball_point(p + direction * i * self.growfactor, i)
+            i = i * self.growfactor
+            neighbors = self.kdtree.query_ball_point(p + direction * i, i)
             # if len(neighbors) == 0:
             #     return None, None
-            if len(neighbors) >= self.tolerance or i > self.step_size * 3:
+            if len(neighbors) >= self.tolerance or i > self.step_size * 2:
                 break
         if len(neighbors) < self.tolerance:
-            dists, ps = self.kdtree.query([p + direction * i * self.growfactor])
+            dists, ps = self.kdtree.query([p + direction * i])
             newp = self.unsorted[ps[0]]
             return newp, None
-        dists, ps = self.kdtree.query([p + direction * i * self.growfactor])
+        dists, ps = self.kdtree.query([p + direction * i])
         newp = self.unsorted[ps[0]]
         pca = PCA(n_components=1)
         pca.fit(self.unsorted[neighbors])
