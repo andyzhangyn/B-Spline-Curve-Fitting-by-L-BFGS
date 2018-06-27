@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/yuanning/DeepMotion/c_meshlab_project/main.cpp
+sys/types.h
+-
+dirent.h
+-
+errno.h
+-
+iostream
+-
+cstdio
+-
+ctime
+-
+fstream
+-
+string
+-
+vector
+-
+algorithm
+-
+

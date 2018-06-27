@@ -2,7 +2,7 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
-      <config projectName="DeepMotion" targetName="DeepMotion" />
+      <config projectName="c_meshlab_project" targetName="c_meshlab_project" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -29,18 +29,37 @@
     <SUITE FILE_PATH="coverage/DeepMotion$b_spline_model_3d.coverage" NAME="b_spline_model_3d Coverage Results" MODIFIED="1528276964304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Meshlab_project" />
     <SUITE FILE_PATH="coverage/DeepMotion$lane_3d.coverage" NAME="lane_3d Coverage Results" MODIFIED="1530005863446" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Meshlab_project" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="lane_3d.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="lane_3d.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Meshlab_project/lane_3d.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="427">
-              <caret line="419" lean-forward="true" selection-start-line="419" selection-end-line="419" />
+            <state relative-caret-position="190">
+              <caret line="410" column="55" lean-forward="true" selection-start-line="410" selection-start-column="55" selection-end-line="410" selection-end-column="55" />
               <folding>
-                <element signature="n#!!doc" />
                 <element signature="e#482#486#0" />
-                <element signature="e#2770#6230#0" />
-                <element signature="e#6315#9735#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/c_meshlab_project/CMakeLists.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/c_meshlab_project/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+              <folding>
+                <element signature="e#97#119#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -49,8 +68,8 @@
       <file leaf-file-name="sort_3d_data.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Meshlab_project/sort_3d_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1170">
-              <caret line="114" column="33" selection-start-line="114" selection-start-column="33" selection-end-line="114" selection-end-column="33" />
+            <state relative-caret-position="577">
+              <caret line="115" column="33" selection-start-line="115" selection-start-column="33" selection-end-line="115" selection-end-column="33" />
               <folding>
                 <element signature="e#143#161#0" expanded="true" />
               </folding>
@@ -64,6 +83,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="CMakeLists.txt" />
       </list>
     </option>
   </component>
@@ -89,6 +109,8 @@
         <option value="$PROJECT_DIR$/Meshlab_project/b_spline_model_3d.py" />
         <option value="$PROJECT_DIR$/Meshlab_project/sort_3d_data.py" />
         <option value="$PROJECT_DIR$/Meshlab_project/lane_3d.py" />
+        <option value="$PROJECT_DIR$/c_meshlab_project/main.cpp" />
+        <option value="$PROJECT_DIR$/c_meshlab_project/CMakeLists.txt" />
       </list>
     </option>
   </component>
@@ -112,20 +134,21 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="DeepMotion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="untitled1" type="b2602c69:ProjectViewProjectNode" />
               <item name="DeepMotion" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="DeepMotion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="untitled1" type="b2602c69:ProjectViewProjectNode" />
               <item name="DeepMotion" type="462c0819:PsiDirectoryNode" />
               <item name="c_meshlab_project" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="DeepMotion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="untitled1" type="b2602c69:ProjectViewProjectNode" />
               <item name="DeepMotion" type="462c0819:PsiDirectoryNode" />
               <item name="Meshlab_project" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -133,7 +156,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -160,9 +182,9 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.lane_3d">
-    <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all" />
-    <configuration name="DeepMotion" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="DeepMotion" TARGET_NAME="DeepMotion" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="DeepMotion" RUN_TARGET_NAME="DeepMotion" />
+  <component name="RunManager" selected="Application.c_meshlab_project">
+    <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="c_meshlab_project" RUN_TARGET_NAME="c_meshlab_project" EXPLICIT_BUILD_TARGET_NAME="all" />
+    <configuration name="c_meshlab_project" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="c_meshlab_project" TARGET_NAME="c_meshlab_project" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="c_meshlab_project" RUN_TARGET_NAME="c_meshlab_project" />
     <configuration name="b_spline_model_3d" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="DeepMotion" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -259,6 +281,8 @@
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <list>
+      <item itemvalue="Application.Build All" />
+      <item itemvalue="Application.c_meshlab_project" />
       <item itemvalue="Python.lane_math" />
       <item itemvalue="Python.sort_data" />
       <item itemvalue="Python.lane_3d" />
@@ -291,11 +315,12 @@
       <workItem from="1529899668879" duration="600000" />
       <workItem from="1529907475287" duration="415000" />
       <workItem from="1529916810435" duration="5000" />
+      <workItem from="1530067364463" duration="10444000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2883000" />
+    <option name="totallyTimeSpent" value="13327000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -308,33 +333,43 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
-    <editor active="true" />
     <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13908356" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3291536" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32959184" />
+      <window_info anchor="bottom" id="CMake" order="9" weight="0.32959184" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3291536" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3291536" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13844457" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.32984003" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32857144" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32857144" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39916405" />
-      <window_info active="true" anchor="bottom" id="CMake" order="9" visible="true" weight="0.32959184" />
+      <window_info anchor="bottom" id="CMake" order="9" weight="0.32959184" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="8" weight="0.3291536" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14065085" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Messages" order="7" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3291536" />
+      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32857144" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39916405" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32959184" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.32984003" />
       <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32857144" />
       <window_info anchor="right" id="Coverage" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="7" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -356,20 +391,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/colorized_curves/colorized_curve_05_00000000.off">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lane/b_spline_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1395">
-          <caret line="98" column="45" lean-forward="true" selection-start-line="98" selection-start-column="45" selection-end-line="98" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python2.7/dist-packages/sklearn/decomposition/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2280">
@@ -669,8 +690,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Meshlab_project/sort_3d_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1170">
-          <caret line="114" column="33" selection-start-line="114" selection-start-column="33" selection-end-line="114" selection-end-column="33" />
+        <state relative-caret-position="577">
+          <caret line="115" column="33" selection-start-line="115" selection-start-column="33" selection-end-line="115" selection-end-column="33" />
           <folding>
             <element signature="e#143#161#0" expanded="true" />
           </folding>
@@ -679,13 +700,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Meshlab_project/lane_3d.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="419" lean-forward="true" selection-start-line="419" selection-end-line="419" />
+        <state relative-caret-position="190">
+          <caret line="410" column="55" lean-forward="true" selection-start-line="410" selection-start-column="55" selection-end-line="410" selection-end-column="55" />
           <folding>
-            <element signature="n#!!doc" />
             <element signature="e#482#486#0" />
-            <element signature="e#2770#6230#0" />
-            <element signature="e#6315#9735#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/c_meshlab_project/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/c_meshlab_project/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+          <folding>
+            <element signature="e#97#119#0" expanded="true" />
           </folding>
         </state>
       </provider>

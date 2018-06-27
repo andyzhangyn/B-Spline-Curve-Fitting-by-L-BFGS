@@ -48,24 +48,13 @@ RM = /opt/clion-2018.1.2/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/yuanning/DeepMotion
+CMAKE_SOURCE_DIR = /home/yuanning/DeepMotion/c_meshlab_project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/yuanning/DeepMotion/cmake-build-debug
+CMAKE_BINARY_DIR = /home/yuanning/DeepMotion/c_meshlab_project/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/opt/clion-2018.1.2/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
 
 # Special rule for the target rebuild_cache
 rebuild_cache:
@@ -78,11 +67,22 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/opt/clion-2018.1.2/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuanning/DeepMotion/cmake-build-debug/CMakeFiles /home/yuanning/DeepMotion/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuanning/DeepMotion/c_meshlab_project/cmake-build-debug/CMakeFiles /home/yuanning/DeepMotion/c_meshlab_project/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuanning/DeepMotion/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/yuanning/DeepMotion/c_meshlab_project/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named DeepMotion
+# Target rules for targets named c_meshlab_project
 
 # Build rule for target.
-DeepMotion: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 DeepMotion
-.PHONY : DeepMotion
+c_meshlab_project: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 c_meshlab_project
+.PHONY : c_meshlab_project
 
 # fast build rule for target.
-DeepMotion/fast:
-	$(MAKE) -f CMakeFiles/DeepMotion.dir/build.make CMakeFiles/DeepMotion.dir/build
-.PHONY : DeepMotion/fast
+c_meshlab_project/fast:
+	$(MAKE) -f CMakeFiles/c_meshlab_project.dir/build.make CMakeFiles/c_meshlab_project.dir/build
+.PHONY : c_meshlab_project/fast
 
-SplineDrawer-master/spline_to_bezier.o: SplineDrawer-master/spline_to_bezier.m.o
+main.o: main.cpp.o
 
-.PHONY : SplineDrawer-master/spline_to_bezier.o
+.PHONY : main.o
 
 # target to build an object file
-SplineDrawer-master/spline_to_bezier.m.o:
-	$(MAKE) -f CMakeFiles/DeepMotion.dir/build.make CMakeFiles/DeepMotion.dir/SplineDrawer-master/spline_to_bezier.m.o
-.PHONY : SplineDrawer-master/spline_to_bezier.m.o
+main.cpp.o:
+	$(MAKE) -f CMakeFiles/c_meshlab_project.dir/build.make CMakeFiles/c_meshlab_project.dir/main.cpp.o
+.PHONY : main.cpp.o
 
-SplineDrawer-master/spline_to_bezier.i: SplineDrawer-master/spline_to_bezier.m.i
+main.i: main.cpp.i
 
-.PHONY : SplineDrawer-master/spline_to_bezier.i
+.PHONY : main.i
 
 # target to preprocess a source file
-SplineDrawer-master/spline_to_bezier.m.i:
-	$(MAKE) -f CMakeFiles/DeepMotion.dir/build.make CMakeFiles/DeepMotion.dir/SplineDrawer-master/spline_to_bezier.m.i
-.PHONY : SplineDrawer-master/spline_to_bezier.m.i
+main.cpp.i:
+	$(MAKE) -f CMakeFiles/c_meshlab_project.dir/build.make CMakeFiles/c_meshlab_project.dir/main.cpp.i
+.PHONY : main.cpp.i
 
-SplineDrawer-master/spline_to_bezier.s: SplineDrawer-master/spline_to_bezier.m.s
+main.s: main.cpp.s
 
-.PHONY : SplineDrawer-master/spline_to_bezier.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-SplineDrawer-master/spline_to_bezier.m.s:
-	$(MAKE) -f CMakeFiles/DeepMotion.dir/build.make CMakeFiles/DeepMotion.dir/SplineDrawer-master/spline_to_bezier.m.s
-.PHONY : SplineDrawer-master/spline_to_bezier.m.s
+main.cpp.s:
+	$(MAKE) -f CMakeFiles/c_meshlab_project.dir/build.make CMakeFiles/c_meshlab_project.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -156,12 +156,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... DeepMotion"
-	@echo "... SplineDrawer-master/spline_to_bezier.o"
-	@echo "... SplineDrawer-master/spline_to_bezier.i"
-	@echo "... SplineDrawer-master/spline_to_bezier.s"
+	@echo "... edit_cache"
+	@echo "... c_meshlab_project"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 

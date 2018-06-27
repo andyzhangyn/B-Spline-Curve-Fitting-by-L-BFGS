@@ -412,7 +412,7 @@ if __name__ == '__main__':
     files = sorted(os.listdir(data_path))
     n = len(files)
 
-    for i in range(600, 657):
+    for i in range(0, 10):
         lane_mask = read_off(os.path.join(data_path, files[i]))  # 657 files
 
         # print(lane_mask)
