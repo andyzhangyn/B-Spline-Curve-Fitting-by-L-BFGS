@@ -57,38 +57,38 @@ include CMakeFiles/c_meshlab_project.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/c_meshlab_project.dir/flags.make
 
-CMakeFiles/c_meshlab_project.dir/main.cpp.o: CMakeFiles/c_meshlab_project.dir/flags.make
-CMakeFiles/c_meshlab_project.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yuanning/DeepMotion/c_meshlab_project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/c_meshlab_project.dir/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/c_meshlab_project.dir/main.cpp.o -c /home/yuanning/DeepMotion/c_meshlab_project/main.cpp
+CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.o: CMakeFiles/c_meshlab_project.dir/flags.make
+CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.o: ../lane_3d.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/yuanning/DeepMotion/c_meshlab_project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.o -c /home/yuanning/DeepMotion/c_meshlab_project/lane_3d.cpp
 
-CMakeFiles/c_meshlab_project.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/c_meshlab_project.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yuanning/DeepMotion/c_meshlab_project/main.cpp > CMakeFiles/c_meshlab_project.dir/main.cpp.i
+CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yuanning/DeepMotion/c_meshlab_project/lane_3d.cpp > CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.i
 
-CMakeFiles/c_meshlab_project.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/c_meshlab_project.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yuanning/DeepMotion/c_meshlab_project/main.cpp -o CMakeFiles/c_meshlab_project.dir/main.cpp.s
+CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yuanning/DeepMotion/c_meshlab_project/lane_3d.cpp -o CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.s
 
-CMakeFiles/c_meshlab_project.dir/main.cpp.o.requires:
+CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.o.requires:
 
-.PHONY : CMakeFiles/c_meshlab_project.dir/main.cpp.o.requires
+.PHONY : CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.o.requires
 
-CMakeFiles/c_meshlab_project.dir/main.cpp.o.provides: CMakeFiles/c_meshlab_project.dir/main.cpp.o.requires
-	$(MAKE) -f CMakeFiles/c_meshlab_project.dir/build.make CMakeFiles/c_meshlab_project.dir/main.cpp.o.provides.build
-.PHONY : CMakeFiles/c_meshlab_project.dir/main.cpp.o.provides
+CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.o.provides: CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.o.requires
+	$(MAKE) -f CMakeFiles/c_meshlab_project.dir/build.make CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.o.provides.build
+.PHONY : CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.o.provides
 
-CMakeFiles/c_meshlab_project.dir/main.cpp.o.provides.build: CMakeFiles/c_meshlab_project.dir/main.cpp.o
+CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.o.provides.build: CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.o
 
 
 # Object files for target c_meshlab_project
 c_meshlab_project_OBJECTS = \
-"CMakeFiles/c_meshlab_project.dir/main.cpp.o"
+"CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.o"
 
 # External object files for target c_meshlab_project
 c_meshlab_project_EXTERNAL_OBJECTS =
 
-c_meshlab_project: CMakeFiles/c_meshlab_project.dir/main.cpp.o
+c_meshlab_project: CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.o
 c_meshlab_project: CMakeFiles/c_meshlab_project.dir/build.make
 c_meshlab_project: CMakeFiles/c_meshlab_project.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/yuanning/DeepMotion/c_meshlab_project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable c_meshlab_project"
@@ -99,7 +99,7 @@ CMakeFiles/c_meshlab_project.dir/build: c_meshlab_project
 
 .PHONY : CMakeFiles/c_meshlab_project.dir/build
 
-CMakeFiles/c_meshlab_project.dir/requires: CMakeFiles/c_meshlab_project.dir/main.cpp.o.requires
+CMakeFiles/c_meshlab_project.dir/requires: CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.o.requires
 
 .PHONY : CMakeFiles/c_meshlab_project.dir/requires
 

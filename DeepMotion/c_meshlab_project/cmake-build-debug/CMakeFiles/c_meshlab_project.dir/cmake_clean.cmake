@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/c_meshlab_project.dir/main.cpp.o"
+  "CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.o"
   "c_meshlab_project.pdb"
   "c_meshlab_project"
 )

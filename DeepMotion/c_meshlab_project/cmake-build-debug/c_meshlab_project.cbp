@@ -84,7 +84,10 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/yuanning/DeepMotion/c_meshlab_project/main.cpp">
+		<Unit filename="/home/yuanning/DeepMotion/c_meshlab_project/lane_3d.cpp">
+			<Option target="c_meshlab_project"/>
+		</Unit>
+		<Unit filename="/home/yuanning/DeepMotion/c_meshlab_project/lane_3d.h">
 			<Option target="c_meshlab_project"/>
 		</Unit>
 		<Unit filename="/home/yuanning/DeepMotion/c_meshlab_project/CMakeLists.txt">

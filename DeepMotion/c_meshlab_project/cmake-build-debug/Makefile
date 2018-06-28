@@ -123,32 +123,32 @@ c_meshlab_project/fast:
 	$(MAKE) -f CMakeFiles/c_meshlab_project.dir/build.make CMakeFiles/c_meshlab_project.dir/build
 .PHONY : c_meshlab_project/fast
 
-main.o: main.cpp.o
+lane_3d.o: lane_3d.cpp.o
 
-.PHONY : main.o
+.PHONY : lane_3d.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/c_meshlab_project.dir/build.make CMakeFiles/c_meshlab_project.dir/main.cpp.o
-.PHONY : main.cpp.o
+lane_3d.cpp.o:
+	$(MAKE) -f CMakeFiles/c_meshlab_project.dir/build.make CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.o
+.PHONY : lane_3d.cpp.o
 
-main.i: main.cpp.i
+lane_3d.i: lane_3d.cpp.i
 
-.PHONY : main.i
+.PHONY : lane_3d.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/c_meshlab_project.dir/build.make CMakeFiles/c_meshlab_project.dir/main.cpp.i
-.PHONY : main.cpp.i
+lane_3d.cpp.i:
+	$(MAKE) -f CMakeFiles/c_meshlab_project.dir/build.make CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.i
+.PHONY : lane_3d.cpp.i
 
-main.s: main.cpp.s
+lane_3d.s: lane_3d.cpp.s
 
-.PHONY : main.s
+.PHONY : lane_3d.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/c_meshlab_project.dir/build.make CMakeFiles/c_meshlab_project.dir/main.cpp.s
-.PHONY : main.cpp.s
+lane_3d.cpp.s:
+	$(MAKE) -f CMakeFiles/c_meshlab_project.dir/build.make CMakeFiles/c_meshlab_project.dir/lane_3d.cpp.s
+.PHONY : lane_3d.cpp.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... c_meshlab_project"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... lane_3d.o"
+	@echo "... lane_3d.i"
+	@echo "... lane_3d.s"
 .PHONY : help
 
 

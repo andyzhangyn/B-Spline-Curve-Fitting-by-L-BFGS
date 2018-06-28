@@ -412,11 +412,12 @@ if __name__ == '__main__':
     files = sorted(os.listdir(data_path))
     n = len(files)
 
-    for i in range(0, 10):
+    for i in range(n):
+        # print(files[i])
         lane_mask = read_off(os.path.join(data_path, files[i]))  # 657 files
 
-        # print(lane_mask)
-        # print(lane_mask.shape)
+        print(lane_mask)
+        print(lane_mask.shape)
 
         lane3d = Lane3D()
         curve = lane3d.fit(lane_mask, displayed_points=1000)
