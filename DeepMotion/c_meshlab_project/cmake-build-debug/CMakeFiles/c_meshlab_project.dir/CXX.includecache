@@ -7,17 +7,25 @@
 #IncludeRegexTransform: 
 
 /home/yuanning/DeepMotion/c_meshlab_project/lane_3d.cpp
+algorithm
+-
+opencv2/opencv.hpp
+/home/yuanning/DeepMotion/c_meshlab_project/opencv2/opencv.hpp
+opencv2/highgui.hpp
+/home/yuanning/DeepMotion/c_meshlab_project/opencv2/highgui.hpp
+opencv2/imgproc.hpp
+/home/yuanning/DeepMotion/c_meshlab_project/opencv2/imgproc.hpp
 lane_3d.h
 /home/yuanning/DeepMotion/c_meshlab_project/lane_3d.h
-vector
--
-numeric
--
 sys/types.h
 -
 dirent.h
 -
 errno.h
+-
+vector
+-
+numeric
 -
 iostream
 -
@@ -28,10 +36,6 @@ ctime
 fstream
 -
 string
--
-algorithm
--
-opencv2/opencv.hpp
 -
 
 /home/yuanning/DeepMotion/c_meshlab_project/lane_3d.h

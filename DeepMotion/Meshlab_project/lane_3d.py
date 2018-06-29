@@ -88,7 +88,8 @@ class Lane3D():
         best_polyy = None
         best_polyz = None
         num = 0
-        for i in range(niter):
+        i = 0
+        while True:
             newdataxs = []
             newdatays = []
             newdatazs = []
@@ -105,7 +106,9 @@ class Lane3D():
                 polyz = sp.interpolate.lagrange(range(2), [datazs[rand1], datazs[rand2]])
                 gain = 0
                 M = 15
-                for j in range(len(dataxs)):
+                j = 0
+                l = len(dataxs)
+                while True:
                     p3 = np.array([dataxs[j], datays[j], datazs[j]])
                     A = np.linspace(-0.5, 1.5, 2 * M + 1)
                     B = np.transpose(np.array([polyx(A), polyy(A), polyz(A)]))
@@ -115,6 +118,9 @@ class Lane3D():
                         newdatays.append(p3[1])
                         newdatazs.append(p3[2])
                         gain = gain + 1
+                    j += 1
+                    if j == l:
+                        break
                 newdataxs = np.array(newdataxs)
                 newdatays = np.array(newdatays)
                 newdatazs = np.array(newdatazs)
@@ -150,7 +156,9 @@ class Lane3D():
                 polyz = sp.interpolate.lagrange(range(3), [datazs[rand1], datazs[rand2], datazs[rand3]])
                 gain = 0
                 M = 10
-                for j in range(len(dataxs)):
+                j = 0
+                l = len(dataxs)
+                while True:
                     p3 = np.array([dataxs[j], datays[j], datazs[j]])
                     A = np.linspace(-1, 3, 4 * M + 1)
                     B = np.transpose(np.array([polyx(A), polyy(A), polyz(A)]))
@@ -160,6 +168,9 @@ class Lane3D():
                         newdatays.append(p3[1])
                         newdatazs.append(p3[2])
                         gain = gain + 1
+                    j += 1
+                    if j == l:
+                        break
                 newdataxs = np.array(newdataxs)
                 newdatays = np.array(newdatays)
                 newdatazs = np.array(newdatazs)
@@ -183,6 +194,9 @@ class Lane3D():
                     # A = np.linspace(-1, 3, 41)
                     # plt.plot(best_polyx(A), best_polyy(A), 'k.-')
                     return np.transpose(np.array([best_dataxs, best_datays, best_datazs]))
+            i += 1
+            if i == niter:
+                break
         # A = np.linspace(-1, 3, 41)
         # plt.plot(best_polyx(A), best_polyy(A), 'k.-')
         return np.transpose(np.array([best_dataxs, best_datays, best_datazs]))
@@ -295,7 +309,8 @@ class Lane3D():
         best_polyy = None
         best_polyz = None
         num = 0
-        for i in range(niter):
+        i = 0
+        while True:
             # print(i)
             newdataxs = []
             newdatays = []
@@ -332,7 +347,9 @@ class Lane3D():
             polyz = sp.interpolate.lagrange(range(2), [datazs[rand1], datazs[rand2]])
             gain = 0
             M = 15
-            for j in range(len(dataxs)):
+            j = 0
+            l = len(dataxs)
+            while True:
                 p3 = np.array([dataxs[j], datays[j], datazs[j]])
                 A = np.linspace(-0.5, 1.5, 2 * M + 1)
                 # plt.plot(polyx(A), polyy(A), 'k')
@@ -343,6 +360,9 @@ class Lane3D():
                     newdatays.append(p3[1])
                     newdatazs.append(p3[2])
                     gain = gain + 1
+                j += 1;
+                if j == l:
+                    break
             newdataxs = np.array(newdataxs)
             newdatays = np.array(newdatays)
             newdatazs = np.array(newdatazs)
@@ -363,6 +383,9 @@ class Lane3D():
             if gain == n:
                 break
             num = num + 1
+            i += 1
+            if i == niter:
+                break
         # A = np.linspace(-0.5, 1.5, 10)
         # plt.plot(best_polyx(A), best_polyy(A), 'k')
         # print(num)
@@ -412,12 +435,12 @@ if __name__ == '__main__':
     files = sorted(os.listdir(data_path))
     n = len(files)
 
-    for i in range(n):
+    for i in range(60, 90):
         # print(files[i])
         lane_mask = read_off(os.path.join(data_path, files[i]))  # 657 files
 
-        print(lane_mask)
-        print(lane_mask.shape)
+        # print(lane_mask)
+        # print(lane_mask.shape)
 
         lane3d = Lane3D()
         curve = lane3d.fit(lane_mask, displayed_points=1000)
@@ -431,12 +454,11 @@ if __name__ == '__main__':
         # set_color(curve_path, 1.0, 0.0, 0.0, 0.75, colorized_curve_path)
         plt.plot(np.transpose(lane_mask)[0], np.transpose(lane_mask)[1], "b,")
         plt.plot(np.transpose(curve)[0], np.transpose(curve)[1], 'r')
-        # plt.show()
+        plt.show()
+        # if i % 10 == 9:
+        #     plt.show()
 
         print(files[i])
-
-        if i % 10 == 9:
-            plt.show()
     # plt.show()
 
     # lane_mask = read_off(os.path.join(data_path, "00_00000139.off"))  # 05_00000008.off,05_00000020.off,05_00000022.off

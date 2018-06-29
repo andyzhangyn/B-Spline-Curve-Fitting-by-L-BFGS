@@ -24,12 +24,18 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/opt/clion-2018.1.2/bin/cmake/share/cmake-3.10/Modules/Compiler/GNU-C.cmake"
   "/opt/clion-2018.1.2/bin/cmake/share/cmake-3.10/Modules/Compiler/GNU-CXX.cmake"
   "/opt/clion-2018.1.2/bin/cmake/share/cmake-3.10/Modules/Compiler/GNU.cmake"
+  "/opt/clion-2018.1.2/bin/cmake/share/cmake-3.10/Modules/FindPackageHandleStandardArgs.cmake"
+  "/opt/clion-2018.1.2/bin/cmake/share/cmake-3.10/Modules/FindPackageMessage.cmake"
   "/opt/clion-2018.1.2/bin/cmake/share/cmake-3.10/Modules/Platform/Linux-GNU-C.cmake"
   "/opt/clion-2018.1.2/bin/cmake/share/cmake-3.10/Modules/Platform/Linux-GNU-CXX.cmake"
   "/opt/clion-2018.1.2/bin/cmake/share/cmake-3.10/Modules/Platform/Linux-GNU.cmake"
   "/opt/clion-2018.1.2/bin/cmake/share/cmake-3.10/Modules/Platform/Linux.cmake"
   "/opt/clion-2018.1.2/bin/cmake/share/cmake-3.10/Modules/Platform/UnixPaths.cmake"
   "/opt/clion-2018.1.2/bin/cmake/share/cmake-3.10/Modules/ProcessorCount.cmake"
+  "/usr/local/share/OpenCV/OpenCVConfig-version.cmake"
+  "/usr/local/share/OpenCV/OpenCVConfig.cmake"
+  "/usr/local/share/OpenCV/OpenCVModules-release.cmake"
+  "/usr/local/share/OpenCV/OpenCVModules.cmake"
   )
 
 # The corresponding makefile is:
