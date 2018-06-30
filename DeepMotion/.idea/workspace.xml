@@ -24,7 +24,7 @@
     <SUITE FILE_PATH="coverage/DeepMotion$sort_data.coverage" NAME="sort_data Coverage Results" MODIFIED="1528164539631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
     <SUITE FILE_PATH="coverage/DeepMotion$show_data.coverage" NAME="show_data Coverage Results" MODIFIED="1527835186717" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
     <SUITE FILE_PATH="coverage/DeepMotion$lane_math.coverage" NAME="lane_math Coverage Results" MODIFIED="1528268848599" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
-    <SUITE FILE_PATH="coverage/c_meshlab_project$lane_3d.coverage" NAME="lane_3d Coverage Results" MODIFIED="1530260531843" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Meshlab_project" />
+    <SUITE FILE_PATH="coverage/c_meshlab_project$lane_3d.coverage" NAME="lane_3d Coverage Results" MODIFIED="1530351714057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Meshlab_project" />
     <SUITE FILE_PATH="coverage/DeepMotion$quadtree.coverage" NAME="quadtree Coverage Results" MODIFIED="1527828352472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
     <SUITE FILE_PATH="coverage/DeepMotion$b_spline.coverage" NAME="b_spline Coverage Results" MODIFIED="1527124352934" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lane" />
     <SUITE FILE_PATH="coverage/DeepMotion$b_spline_model_3d.coverage" NAME="b_spline_model_3d Coverage Results" MODIFIED="1528276964304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Meshlab_project" />
@@ -32,32 +32,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="lane_3d.cpp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/c_meshlab_project/lane_3d.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="14" lean-forward="true" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="lane_3d.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="lane_3d.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Meshlab_project/lane_3d.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="900">
-              <caret line="461" column="16" selection-start-line="461" selection-start-column="16" selection-end-line="461" selection-end-column="16" />
+            <state relative-caret-position="-231">
+              <caret line="443" lean-forward="true" selection-start-line="443" selection-end-line="443" />
               <folding>
                 <element signature="e#482#486#0" />
+                <element signature="e#2522#2792#0" />
+                <element signature="e#2877#8134#0" />
+                <element signature="e#8225#11685#0" />
+                <element signature="e#11770#15367#0" />
+                <element signature="e#15399#15753#0" />
+                <element signature="e#15793#15992#0" />
+                <element signature="e#16055#16579#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/c_meshlab_project/CMakeLists.txt">
+      <file leaf-file-name="b_spline_model_3d.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Meshlab_project/b_spline_model_3d.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="339">
+              <caret line="37" column="60" selection-start-line="37" selection-start-column="60" selection-end-line="37" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -94,11 +92,11 @@
         <option value="$PROJECT_DIR$/lane/sort_data.py" />
         <option value="$PROJECT_DIR$/lane/lane_math.py" />
         <option value="$PROJECT_DIR$/Meshlab_project/cubic_b_spline_3d.py" />
-        <option value="$PROJECT_DIR$/Meshlab_project/b_spline_model_3d.py" />
         <option value="$PROJECT_DIR$/Meshlab_project/sort_3d_data.py" />
         <option value="$PROJECT_DIR$/c_meshlab_project/main.cpp" />
         <option value="$PROJECT_DIR$/c_meshlab_project/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/c_meshlab_project/lane_3d.cpp" />
+        <option value="$PROJECT_DIR$/Meshlab_project/b_spline_model_3d.py" />
         <option value="$PROJECT_DIR$/Meshlab_project/lane_3d.py" />
       </list>
     </option>
@@ -133,12 +131,7 @@
             <path>
               <item name="c_meshlab_project" type="b2602c69:ProjectViewProjectNode" />
               <item name="DeepMotion" type="462c0819:PsiDirectoryNode" />
-              <item name="c_meshlab_project" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="c_meshlab_project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DeepMotion" type="462c0819:PsiDirectoryNode" />
-              <item name="pointclouds" type="462c0819:PsiDirectoryNode" />
+              <item name="Meshlab_project" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -270,8 +263,6 @@
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <list>
-      <item itemvalue="Application.Build All" />
-      <item itemvalue="Application.c_meshlab_project" />
       <item itemvalue="Python.lane_math" />
       <item itemvalue="Python.sort_data" />
       <item itemvalue="Python.lane_3d" />
@@ -310,12 +301,13 @@
       <workItem from="1530159422139" duration="40000" />
       <workItem from="1530159470520" duration="14698000" />
       <workItem from="1530240186780" duration="25000" />
-      <workItem from="1530240219161" duration="13142000" />
+      <workItem from="1530240219161" duration="13297000" />
+      <workItem from="1530324588268" duration="3364000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46148000" />
+    <option name="totallyTimeSpent" value="49667000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -330,42 +322,31 @@
     <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14447439" />
       <window_info anchor="bottom" id="TODO" order="9" weight="0.3291536" />
-      <window_info active="true" anchor="bottom" id="Messages" order="17" visible="true" weight="0.32959184" />
-      <window_info anchor="bottom" id="CMake" order="22" weight="0.32959184" />
-      <window_info anchor="bottom" id="Event Log" order="19" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="14" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="4" weight="0.327551" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="18" weight="0.327551" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="5" weight="0.39916405" />
-      <window_info anchor="bottom" id="CMake" order="22" weight="0.32959184" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.145615" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="9" weight="0.3291536" />
-      <window_info anchor="bottom" id="Version Control" order="14" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="4" visible="true" weight="0.32706374" />
-      <window_info anchor="bottom" id="Python Console" order="16" />
-      <window_info anchor="bottom" id="Debug" order="5" weight="0.39916405" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info active="true" anchor="bottom" id="Messages" order="17" visible="true" weight="0.32959184" />
-      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Event Log" order="19" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="20" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="14" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Python Console" order="16" />
+      <window_info active="true" anchor="bottom" id="Run" order="4" visible="true" weight="0.32706374" />
+      <window_info anchor="bottom" id="Terminal" order="18" weight="0.327551" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14837286" />
+      <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.32984003" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="5" weight="0.39916405" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info active="true" anchor="bottom" id="Messages" order="17" visible="true" weight="0.32959184" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="21" weight="0.3291536" />
-      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.32984003" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Terminal" order="18" weight="0.327551" />
+      <window_info anchor="bottom" id="CMake" order="22" weight="0.32959184" />
       <window_info anchor="right" id="Coverage" order="3" side_tool="true" />
-      <window_info id="Favorites" order="2" side_tool="true" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -383,7 +364,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -654,13 +635,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Meshlab_project/b_spline_model_3d.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Meshlab_project/tmpHwe2he.xyz" />
     <entry file="file://$PROJECT_DIR$/colorized_curves/colorized_curve_00_00000000.off">
       <provider selected="true" editor-type-id="text-editor">
@@ -694,23 +668,37 @@
     <entry file="file://$PROJECT_DIR$/c_meshlab_project/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/c_meshlab_project/lane_3d.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="14" lean-forward="true" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
+        <state relative-caret-position="211">
+          <caret line="77" column="16" selection-start-line="77" selection-start-column="16" selection-end-line="77" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Meshlab_project/b_spline_model_3d.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="37" column="60" selection-start-line="37" selection-start-column="60" selection-end-line="37" selection-end-column="60" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Meshlab_project/lane_3d.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="461" column="16" selection-start-line="461" selection-start-column="16" selection-end-line="461" selection-end-column="16" />
+        <state relative-caret-position="-231">
+          <caret line="443" lean-forward="true" selection-start-line="443" selection-end-line="443" />
           <folding>
             <element signature="e#482#486#0" />
+            <element signature="e#2522#2792#0" />
+            <element signature="e#2877#8134#0" />
+            <element signature="e#8225#11685#0" />
+            <element signature="e#11770#15367#0" />
+            <element signature="e#15399#15753#0" />
+            <element signature="e#15793#15992#0" />
+            <element signature="e#16055#16579#0" />
           </folding>
         </state>
       </provider>

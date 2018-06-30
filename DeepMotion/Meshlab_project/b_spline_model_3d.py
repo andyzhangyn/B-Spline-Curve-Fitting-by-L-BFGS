@@ -26,14 +26,14 @@ class BSplineModel3D(object):
         self.img = img
         self.id = id
 
-    def l_bfgs_fitting(self, displayed_points=100):
+    def l_bfgs_fitting(self, displayed_points=100, maxf=1000):
         # print(self.pts)
         A = np.transpose(self.pts)
         xs = A[0]
         ys = A[1]
         zs = A[2]
         x = np.concatenate((xs, ys, zs, self.T))
-        x, min_val, info = sp.optimize.fmin_l_bfgs_b(self.loss, x, approx_grad=True, m=8, maxfun=1000)
+        x, min_val, info = sp.optimize.fmin_l_bfgs_b(self.loss, x, approx_grad=True, m=8, maxfun=maxf)
         for k in range(self.n):
             self.pts[k] = [x[k], x[k+self.n], x[k+2*self.n]]
         self.cbs = cubic_b_spline_3d.CubicBSpline3D(self.pts)

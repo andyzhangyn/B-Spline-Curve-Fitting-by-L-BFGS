@@ -37,13 +37,13 @@ class Lane3D():
             # data = self.RANSAC_Linear_Interpolation(data, threshold=self.span(data)/25.0)
             # data = self.RANSAC_Linear_Interpolation(data)
             # data = self.RANSAC_Quadratic_Interpolation(data, threshold=self.span(data)/25.0)
-            data = self.RANSAC_Mixed_Interpolation(data, threshold=self.span(data)/20.0)
-        # plt.plot(np.transpose(data)[0], np.transpose(data)[1], "b^")
+            data = self.RANSAC_Mixed_Interpolation(data, niter=100, threshold=self.span(data)/30.0)
+        plt.plot(np.transpose(data)[0], np.transpose(data)[1], "b^")
 
         s3dd = sort_3d_data.Sort3DData(data, step_size=(self.span(data) / 10.0),
                                        tolerance=max(len(data)/50, 3), growfactor=1.5)
         data = s3dd.getsorted()
-        # plt.plot(np.transpose(data)[0], np.transpose(data)[1], "ro")
+        plt.plot(np.transpose(data)[0], np.transpose(data)[1], "ro")
         pca = PCA(n_components=1)
         newdata = pca.fit_transform(data)
         if len(data) < 5 or pca.explained_variance_ratio_[0] > 0.9995:
@@ -52,7 +52,7 @@ class Lane3D():
             curve = np.dot(ts, [newdata[0]]) + np.dot(1 - ts,  [newdata[-1]])
             return curve
         n = len(data)
-        numctrl = (n - 2) / 3
+        numctrl = (n - 2) / 2
         ctrl = np.array([data[0], data[0], data[0]])
         for i in range(numctrl):
             ctrl = np.append(ctrl, data[(i + 1) * n / (numctrl + 1)])
@@ -61,7 +61,7 @@ class Lane3D():
         ctrl = np.append(ctrl, data[n - 1])
         ctrl = ctrl.reshape(len(ctrl) / 3, 3)
         model = b_spline_model_3d.BSplineModel3D(data, ctrl)
-        curve = model.l_bfgs_fitting(displayed_points=displayed_points)
+        curve = model.l_bfgs_fitting(displayed_points=displayed_points, maxf=2500)
         return curve
 
     def span(self, arr3d):
@@ -110,7 +110,7 @@ class Lane3D():
                 l = len(dataxs)
                 while True:
                     p3 = np.array([dataxs[j], datays[j], datazs[j]])
-                    A = np.linspace(-0.5, 1.5, 2 * M + 1)
+                    A = np.linspace(-1, 2, 3 * M + 1)
                     B = np.transpose(np.array([polyx(A), polyy(A), polyz(A)]))
                     min_point2curve = min(min(distance.cdist([p3], B)))
                     if min_point2curve <= threshold:
@@ -195,7 +195,7 @@ class Lane3D():
                     # plt.plot(best_polyx(A), best_polyy(A), 'k.-')
                     return np.transpose(np.array([best_dataxs, best_datays, best_datazs]))
             i += 1
-            if i == niter:
+            if i == niter or max_gain > 5 * n / 6:
                 break
         # A = np.linspace(-1, 3, 41)
         # plt.plot(best_polyx(A), best_polyy(A), 'k.-')
@@ -435,9 +435,9 @@ if __name__ == '__main__':
     files = sorted(os.listdir(data_path))
     n = len(files)
 
-    for i in range(60, 90):
+    for i in range(n):
         # print(files[i])
-        lane_mask = read_off(os.path.join(data_path, files[i]))  # 657 files
+        lane_mask = read_off(os.path.join(data_path, files[i]))  # 170 files
 
         # print(lane_mask)
         # print(lane_mask.shape)
@@ -448,13 +448,13 @@ if __name__ == '__main__':
         # print(curve)
         # print(curve.shape)
 
-        # curve_path = "/home/yuanning/DeepMotion/curves/curve_{}".format(files[i])
-        # write_off(curve, curve_path)
-        # colorized_curve_path = "/home/yuanning/DeepMotion/colorized_curves/colorized_curve_{}".format(files[i])
-        # set_color(curve_path, 1.0, 0.0, 0.0, 0.75, colorized_curve_path)
-        plt.plot(np.transpose(lane_mask)[0], np.transpose(lane_mask)[1], "b,")
-        plt.plot(np.transpose(curve)[0], np.transpose(curve)[1], 'r')
-        plt.show()
+        curve_path = "/home/yuanning/DeepMotion/curves/curve_{}".format(files[i])
+        write_off(curve, curve_path)
+        colorized_curve_path = "/home/yuanning/DeepMotion/colorized_curves/colorized_curve_{}".format(files[i])
+        set_color(curve_path, 1.0, 0.0, 0.0, 0.75, colorized_curve_path)
+        # plt.plot(np.transpose(lane_mask)[0], np.transpose(lane_mask)[1], "b,")
+        # plt.plot(np.transpose(curve)[0], np.transpose(curve)[1], 'r')
+        # plt.show()
         # if i % 10 == 9:
         #     plt.show()
 

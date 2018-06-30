@@ -2,10 +2,11 @@
 // Created by yuanning on 18-6-28.
 //
 
-#include <algorithm>
 #include "opencv2/opencv.hpp"
 #include "opencv2/highgui.hpp"
 #include "opencv2/imgproc.hpp"
+using namespace cv;
+
 #include "lane_3d.h"
 #include <sys/types.h>
 #include <dirent.h>
@@ -17,12 +18,11 @@
 #include <ctime>
 #include <fstream>
 #include <string>
-
+#include <algorithm>
 //#include "xtensor/xarray.hpp"
 //#include "xtensor/xio.hpp"
 
 using namespace std;
-using namespace cv;
 
 class Lane3D {
 public:
@@ -30,27 +30,27 @@ public:
         return;
     }
 
-    int fit(std::vector<cv::Point3d> &data, std::vector<cv::Point3d> &curve, int displayed_points=100) {
-        int ceil = 100;
-        if (data.size() > ceil) {
-            std::vector<unsigned int> indices(data.size());
-            iota(indices.begin(), indices.end(), 0);
-            random_shuffle(indices.begin(), indices.end());
-            std::vector<cv::Point3d> temp = std::vector<cv::Point3d>();
-            for (unsigned int i = 0; i < ceil; i++) {
-                temp.push_back(data[indices[i]]);
-            }
-            data = temp;
-//            for (unsigned int i = 0; i < data.size(); i++) {
-//                Point p = data[i];
-//                cout << i << " " << p.x << " " << p.y << " " << p.z << endl;
+//    int fit(std::vector<cv::Point3d> &data, std::vector<cv::Point3d> &curve, int displayed_points=100) {
+//        int ceil = 100;
+//        if (data.size() > ceil) {
+//            std::vector<unsigned int> indices(data.size());
+//            iota(indices.begin(), indices.end(), 0);
+//            random_shuffle(indices.begin(), indices.end());
+//            std::vector<cv::Point3d> temp = std::vector<cv::Point3d>();
+//            for (unsigned int i = 0; i < ceil; i++) {
+//                temp.push_back(data[indices[i]]);
 //            }
-        }
-
-        //TODO: complete this method
-
-        return 0;
-    }
+//            data = temp;
+////            for (unsigned int i = 0; i < data.size(); i++) {
+////                Point p = data[i];
+////                cout << i << " " << p.x << " " << p.y << " " << p.z << endl;
+////            }
+//        }
+//
+//        //TODO: complete this method
+//
+//        return 0;
+//    }
 };
 
 int getdir(std::string dir, std::vector<std::string> &files) {
@@ -106,7 +106,7 @@ int main(int argc, char *argv[]) {
 //            Point p = lane_mask[j];
 //            cout << p.x << " " << p.y << " " << p.z << endl;
 //        }
-        std::vector<cv::Point3d> curve = std::vector<cv::Point3d>();
+//        std::vector<cv::Point3d> curve = std::vector<cv::Point3d>();
         Lane3D lane_3d = Lane3D();
 //        lane_3d.fit(lane_mask, curve, 1000);
 //        break;

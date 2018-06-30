@@ -7,8 +7,6 @@
 #IncludeRegexTransform: 
 
 /home/yuanning/DeepMotion/c_meshlab_project/lane_3d.cpp
-algorithm
--
 opencv2/opencv.hpp
 /home/yuanning/DeepMotion/c_meshlab_project/opencv2/opencv.hpp
 opencv2/highgui.hpp
@@ -36,6 +34,8 @@ ctime
 fstream
 -
 string
+-
+algorithm
 -
 
 /home/yuanning/DeepMotion/c_meshlab_project/lane_3d.h
