@@ -22,12 +22,6 @@ class CubicBSpline3D(object):
 
         self.eval = eval
 
-    # def generate(self, newts):
-    #     newpts = np.zeros((len(newts), 3))
-    #     for i in range(len(newts)):
-    #         newpts[i, 0], newpts[i, 1] = self.eval(newts[i])
-    #     return newpts
-
     @staticmethod
     def cubic(k, u):
         u = u - k

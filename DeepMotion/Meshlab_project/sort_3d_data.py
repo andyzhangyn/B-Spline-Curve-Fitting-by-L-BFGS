@@ -5,8 +5,6 @@
 
 
 import numpy as np
-import matplotlib.pyplot as plt
-import time
 from scipy.spatial import kdtree
 from sklearn.decomposition import PCA
 
@@ -102,8 +100,6 @@ class Sort3DData(object):
         while True:
             i = i * self.growfactor
             neighbors = self.kdtree.query_ball_point(p + direction * i, i)
-            # if len(neighbors) == 0:
-            #     return None, None
             if len(neighbors) >= self.tolerance or i > self.step_size * 2:
                 break
         if len(neighbors) < self.tolerance:
@@ -121,19 +117,3 @@ class Sort3DData(object):
 
     def getsorted(self):
         return self.sorted
-
-
-# if __name__ == '__main__':
-#     start = time.time()
-#     plt.imshow(255 - np.zeros((64, 64, 3)))
-#     data_points = [[30, 35], [40, 40], [20, 20], [50, 42], [20, 25], [23, 29], [27, 33], [43, 41],
-#                    [30, 12], [36, 10], [47, 41], [25, 15], [35, 38], [24, 16], [22, 18], [20, 22],
-#                    [33, 37], [32, 11], [27, 13]]
-#     sd = SortData(data_points, step_size=2)
-#     data = sd.getsorted()
-#     print(data)
-#     plt.plot([p[0] for p in data_points], [p[1] for p in data_points], 'b^')
-#     plt.plot([p[0] for p in data], [p[1] for p in data], 'r^--')
-#     plt.show()
-#     end = time.time()
-#     print("Time used: " + str(end - start))

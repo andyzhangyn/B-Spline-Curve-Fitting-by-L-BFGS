@@ -7,7 +7,6 @@
 import numpy as np
 import scipy as sp
 import cubic_b_spline_3d
-import matplotlib.pyplot as plt
 import scipy.optimize
 
 
@@ -16,8 +15,8 @@ class BSplineModel3D(object):
     def __init__(self, data, pts, img=None, id=None):
         self.data = data
         self.pts = pts
-        self.N = data.shape[0]  # fixed
-        self.n = pts.shape[0]  # fixed
+        self.N = data.shape[0]
+        self.n = pts.shape[0]
         self.cbs = cubic_b_spline_3d.CubicBSpline3D(self.pts)
         self.T = np.zeros(self.N)
         k = (self.n - 3.0) / self.N
@@ -27,7 +26,6 @@ class BSplineModel3D(object):
         self.id = id
 
     def l_bfgs_fitting(self, displayed_points=100, maxf=1000):
-        # print(self.pts)
         A = np.transpose(self.pts)
         xs = A[0]
         ys = A[1]
@@ -42,7 +40,6 @@ class BSplineModel3D(object):
         for t in ts:
             curve = np.append(curve, self.cbs.eval(t))
         return curve.reshape(displayed_points, 3)
-        # self.plot_spline()
 
     def loss(self, v):
         newpts = np.zeros((self.n, 3))
@@ -60,25 +57,3 @@ class BSplineModel3D(object):
             sum = sum + dx * dx + dy * dy + dz * dz
         sum = sum * self.N
         return sum
-
-    # def plot(self):
-    #     if self.img is not None:
-    #         plt.imshow(self.img)
-    #     xs = [point[0] for point in self.pts]
-    #     ys = [point[1] for point in self.pts]
-    #     plt.plot(xs, ys, "gs")
-    #     newts = np.linspace(3, self.n, self.n * 10)
-    #     newpts = self.cbs.generate(newts)
-    #     newxs = [point[0] for point in newpts]
-    #     newys = [point[1] for point in newpts]
-    #     plt.plot(newxs, newys, "r")
-    #     dataxs = [point[0] for point in self.data]
-    #     datays = [point[1] for point in self.data]
-    #     plt.plot(dataxs, datays, "b^")
-    #
-    # def plot_spline(self):
-    #     newts = np.linspace(3, self.n, self.n * 10)
-    #     newpts = self.cbs.generate(newts)
-    #     newxs = [point[0] for point in newpts]
-    #     newys = [point[1] for point in newpts]
-    #     plt.plot(newxs, newys, "r")
