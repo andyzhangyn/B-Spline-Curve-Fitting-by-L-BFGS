@@ -34,13 +34,13 @@ class Lane3D():
         pca.fit(data)
         if not (len(data) < 5 or pca.explained_variance_ratio_[0] > 0.999):
             data = self.RANSAC_Mixed_Interpolation(data, niter=100, threshold=self.span(data)/30.0)
-        # plt.plot(np.transpose(data)[0], np.transpose(data)[1], "b^")  # uncomment this line to see result of RANSAC
+        plt.plot(np.transpose(data)[0], np.transpose(data)[1], "b^")  # uncomment this line to see result of RANSAC
 
         # 3: Select some data points in a geometric order
         s3dd = sort_3d_data.Sort3DData(data, step_size=(self.span(data) / 10.0),
-                                       tolerance=max(len(data)/50, 3), growfactor=1.5)
+                                       tolerance=max(len(data)/50, 3), growthfactor=1.2)
         data = s3dd.getsorted()
-        # plt.plot(np.transpose(data)[0], np.transpose(data)[1], "ro")  # uncomment this line to see result of PCA
+        plt.plot(np.transpose(data)[0], np.transpose(data)[1], "ro")  # uncomment this line to see result of PCA
 
         # 4: Use linear model if data points behave linearly
         pca = PCA(n_components=1)
@@ -53,7 +53,7 @@ class Lane3D():
 
         # 5: Otherwise, use B-spline model with L-BFGS method
         n = len(data)
-        numctrl = (n - 2) / 2
+        numctrl = (n - 2) / 3
         ctrl = np.array([data[0], data[0], data[0]])
         for i in range(numctrl):
             ctrl = np.append(ctrl, data[(i + 1) * n / (numctrl + 1)])
@@ -62,7 +62,7 @@ class Lane3D():
         ctrl = np.append(ctrl, data[n - 1])
         ctrl = ctrl.reshape(len(ctrl) / 3, 3)
         model = b_spline_model_3d.BSplineModel3D(data, ctrl)
-        curve = model.l_bfgs_fitting(displayed_points=displayed_points, maxf=2500)
+        curve = model.l_bfgs_fitting(displayed_points=displayed_points, maxf=2000)
         return curve
 
     def span(self, arr3d):
@@ -232,13 +232,13 @@ if __name__ == '__main__':
     files = sorted(os.listdir(data_path))
     n = len(files)
 
-    for i in range(0, 30):
+    for i in range(n):
         lane_mask = read_off(os.path.join(data_path, files[i]))
 
         lane3d = Lane3D()
         curve = lane3d.fit(lane_mask, displayed_points=1000)
 
-        pyplot_visualization = True  # uncomment this to see pyplot visualization instead of writing results to files
+        # pyplot_visualization = True  # uncomment this to see pyplot visualization instead of writing results to files
         if pyplot_visualization:
             plt.plot(np.transpose(lane_mask)[0], np.transpose(lane_mask)[1], "b,")  # uncomment to see original data
             plt.plot(np.transpose(curve)[0], np.transpose(curve)[1], 'r')

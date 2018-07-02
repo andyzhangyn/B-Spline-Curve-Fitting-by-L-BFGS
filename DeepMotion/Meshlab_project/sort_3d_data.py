@@ -9,30 +9,33 @@ from scipy.spatial import kdtree
 from sklearn.decomposition import PCA
 
 
+# This class implements an algorithm that finds a (geometrically) sorted sample of a given 3D point cloud.
 class Sort3DData(object):
 
-    def __init__(self, points, step_size=30, tolerance=20, growfactor=1.1):
-        self.step_size = step_size
+    def __init__(self, points, step_size=30, tolerance=20, growthfactor=1.1):
         np.random.seed(0)
+        self.step_size = step_size
         self.unsorted = np.array(points)
         self.n = len(points)
-        self.sortedxs = []
+        self.sortedxs = []  # these will store the sorted data points returned by this algorithm
         self.sortedys = []
         self.sortedzs = []
         self.kdtree = kdtree.KDTree(points)
         self.tolerance = tolerance
-        self.growfactor = growfactor
-        initpoint = self.unsorted[self.n / 2]
+        self.growthfactor = growthfactor
+        initpoint = self.unsorted[self.n / 2]  # select an initial data point
         i = self.step_size
-        while True:
-            i = i * self.growfactor
+        while True:  # enlarge the searching area to get enough data points
             neighbors = self.kdtree.query_ball_point(initpoint, i)
             if len(neighbors) >= self.tolerance or i > self.step_size * 2:
                 break
+            i = i * self.growthfactor
         pca = PCA(n_components=1)
         pca.fit(self.unsorted[neighbors])
-        initdirection1 = pca.components_[0]
+        initdirection1 = pca.components_[0]  # PCA helps to find the local direction of our initial point
         initdirection2 = -initdirection1
+
+        # Step 1: search along the first direction and store sorted samples
         p = initpoint
         d = initdirection1
         oldp = p
@@ -42,12 +45,9 @@ class Sort3DData(object):
                 break
             oldp = p
             if d is not None:
-                arr1 = np.zeros(1)
-                arr2 = np.zeros(1)
-                arr3 = np.zeros(1)
-                arr1[0] = p[0]
-                arr2[0] = p[1]
-                arr3[0] = p[2]
+                arr1 = np.array([p[0]])
+                arr2 = np.array([p[1]])
+                arr3 = np.array([p[2]])
                 if len(self.sortedxs) == 0:
                     self.sortedxs = arr1
                     self.sortedys = arr2
@@ -56,13 +56,9 @@ class Sort3DData(object):
                     self.sortedxs = np.concatenate((arr1, self.sortedxs))
                     self.sortedys = np.concatenate((arr2, self.sortedys))
                     self.sortedzs = np.concatenate((arr3, self.sortedzs))
-
-        arr1 = np.zeros(1)
-        arr2 = np.zeros(1)
-        arr3 = np.zeros(1)
-        arr1[0] = p[0]
-        arr2[0] = p[1]
-        arr3[0] = p[2]
+        arr1 = np.array([p[0]])
+        arr2 = np.array([p[1]])
+        arr3 = np.array([p[2]])
         if len(self.sortedxs) == 0:
             self.sortedxs = arr1
             self.sortedys = arr2
@@ -72,13 +68,16 @@ class Sort3DData(object):
             self.sortedys = np.concatenate((arr2, self.sortedys))
             self.sortedzs = np.concatenate((arr3, self.sortedzs))
 
+        # Step 2: append the initial point to sorted samples
         self.sortedxs = np.append(self.sortedxs, initpoint[0])
         self.sortedys = np.append(self.sortedys, initpoint[1])
         self.sortedzs = np.append(self.sortedzs, initpoint[2])
+
+        # Step 3: search along the second direction and append new sorted samples to previous samples
         p = initpoint
         d = initdirection2
         oldp = p
-        while d is not None:
+        while d is not None:  # search along the second direction
             p, d = self.searchnext(p, d)
             if d is None or (oldp[0] == p[0] and oldp[1] == p[1] and oldp[2] == p[2]):
                 break
@@ -98,10 +97,10 @@ class Sort3DData(object):
     def searchnext(self, p, direction):
         i = self.step_size
         while True:
-            i = i * self.growfactor
             neighbors = self.kdtree.query_ball_point(p + direction * i, i)
             if len(neighbors) >= self.tolerance or i > self.step_size * 2:
                 break
+            i = i * self.growthfactor
         if len(neighbors) < self.tolerance:
             dists, ps = self.kdtree.query([p + direction * i])
             newp = self.unsorted[ps[0]]
